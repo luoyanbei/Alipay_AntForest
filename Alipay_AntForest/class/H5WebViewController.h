@@ -18,6 +18,8 @@
 +(NSString*)getNumberRandom:(int)count;
 +(void)getTopUserBubbles:(id)mbrige userId:(NSString*)userID;
 +(void)collectBubbles:(id)mbrige bubbleId:(NSString*)bID userId :(NSString*)userID;
++(void)helpCollectBubbles:(id)mbrige bubbleId:(NSString*)bID userId :(NSString*)userID;
+
 +(void)collectTopBub;
 
 - (void)startFirstLoadRequest:(id)arg1;
