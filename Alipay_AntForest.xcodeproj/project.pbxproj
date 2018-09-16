@@ -1,0 +1,429 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3C4ECC84214D4126003C61D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4ECC83214D4126003C61D6 /* UIKit.framework */; };
+		3C4ECC86214D4126003C61D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4ECC85214D4126003C61D6 /* Foundation.framework */; };
+		3C4ECC88214D4126003C61D6 /* CydiaSubstrate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4ECC87214D4126003C61D6 /* CydiaSubstrate.framework */; };
+		3C4ECC91214D4126003C61D6 /* Alipay_AntForest.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C4ECC90214D4126003C61D6 /* Alipay_AntForest.mm */; };
+		3C4ECCC0214D478D003C61D6 /* H5WebViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4ECCB4214D478D003C61D6 /* H5WebViewController.h */; };
+		3C4ECCC1214D478D003C61D6 /* APListData.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4ECCB5214D478D003C61D6 /* APListData.m */; };
+		3C4ECCC2214D478D003C61D6 /* Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4ECCB6214D478D003C61D6 /* Header.h */; };
+		3C4ECCC3214D478D003C61D6 /* APListData.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4ECCB7214D478D003C61D6 /* APListData.h */; };
+		3C4ECCC4214D478D003C61D6 /* H5WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4ECCB8214D478D003C61D6 /* H5WebViewController.m */; };
+		3C4ECCC5214D478D003C61D6 /* PSDJsBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4ECCB9214D478D003C61D6 /* PSDJsBridge.h */; };
+		3C4ECCC6214D478D003C61D6 /* AUToast.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4ECCBA214D478D003C61D6 /* AUToast.h */; };
+		3C4ECCC7214D478D003C61D6 /* NSDictionary+DLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4ECCBC214D478D003C61D6 /* NSDictionary+DLog.h */; };
+		3C4ECCC8214D478D003C61D6 /* NSArray+DLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4ECCBD214D478D003C61D6 /* NSArray+DLog.h */; };
+		3C4ECCC9214D478D003C61D6 /* NSDictionary+DLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4ECCBE214D478D003C61D6 /* NSDictionary+DLog.m */; };
+		3C4ECCCA214D478D003C61D6 /* NSArray+DLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4ECCBF214D478D003C61D6 /* NSArray+DLog.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3C4ECC80214D4126003C61D6 /* Alipay_AntForest.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = Alipay_AntForest.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C4ECC83214D4126003C61D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3C4ECC85214D4126003C61D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3C4ECC87214D4126003C61D6 /* CydiaSubstrate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CydiaSubstrate.framework; path = Library/Frameworks/CydiaSubstrate.framework; sourceTree = DEVELOPER_DIR; };
+		3C4ECC8C214D4126003C61D6 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		3C4ECC8E214D4126003C61D6 /* Alipay_AntForest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Alipay_AntForest-Prefix.pch"; sourceTree = "<group>"; };
+		3C4ECC8F214D4126003C61D6 /* Alipay_AntForest.xm */ = {isa = PBXFileReference; lastKnownFileType = text; path = Alipay_AntForest.xm; sourceTree = "<group>"; };
+		3C4ECC90214D4126003C61D6 /* Alipay_AntForest.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = Alipay_AntForest.mm; sourceTree = "<group>"; };
+		3C4ECC95214D4126003C61D6 /* Alipay_AntForest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Alipay_AntForest.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/Alipay_AntForest.plist; sourceTree = "<group>"; };
+		3C4ECCB4214D478D003C61D6 /* H5WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = H5WebViewController.h; sourceTree = "<group>"; };
+		3C4ECCB5214D478D003C61D6 /* APListData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APListData.m; sourceTree = "<group>"; };
+		3C4ECCB6214D478D003C61D6 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		3C4ECCB7214D478D003C61D6 /* APListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APListData.h; sourceTree = "<group>"; };
+		3C4ECCB8214D478D003C61D6 /* H5WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = H5WebViewController.m; sourceTree = "<group>"; };
+		3C4ECCB9214D478D003C61D6 /* PSDJsBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSDJsBridge.h; sourceTree = "<group>"; };
+		3C4ECCBA214D478D003C61D6 /* AUToast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUToast.h; sourceTree = "<group>"; };
+		3C4ECCBC214D478D003C61D6 /* NSDictionary+DLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+DLog.h"; sourceTree = "<group>"; };
+		3C4ECCBD214D478D003C61D6 /* NSArray+DLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DLog.h"; sourceTree = "<group>"; };
+		3C4ECCBE214D478D003C61D6 /* NSDictionary+DLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DLog.m"; sourceTree = "<group>"; };
+		3C4ECCBF214D478D003C61D6 /* NSArray+DLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DLog.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3C4ECC7C214D4126003C61D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C4ECC84214D4126003C61D6 /* UIKit.framework in Frameworks */,
+				3C4ECC86214D4126003C61D6 /* Foundation.framework in Frameworks */,
+				3C4ECC88214D4126003C61D6 /* CydiaSubstrate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3C4ECC75214D4126003C61D6 = {
+			isa = PBXGroup;
+			children = (
+				3C4ECC89214D4126003C61D6 /* Alipay_AntForest */,
+				3C4ECC82214D4126003C61D6 /* Frameworks */,
+				3C4ECC81214D4126003C61D6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3C4ECC81214D4126003C61D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECC80214D4126003C61D6 /* Alipay_AntForest.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3C4ECC82214D4126003C61D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECC83214D4126003C61D6 /* UIKit.framework */,
+				3C4ECC85214D4126003C61D6 /* Foundation.framework */,
+				3C4ECC87214D4126003C61D6 /* CydiaSubstrate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3C4ECC89214D4126003C61D6 /* Alipay_AntForest */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECCB3214D478D003C61D6 /* class */,
+				3C4ECCBB214D478D003C61D6 /* tools */,
+				3C4ECC8F214D4126003C61D6 /* Alipay_AntForest.xm */,
+				3C4ECC90214D4126003C61D6 /* Alipay_AntForest.mm */,
+				3C4ECC8A214D4126003C61D6 /* Package */,
+				3C4ECC8D214D4126003C61D6 /* Supporting Files */,
+			);
+			path = Alipay_AntForest;
+			sourceTree = "<group>";
+		};
+		3C4ECC8A214D4126003C61D6 /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECC8B214D4126003C61D6 /* DEBIAN */,
+				3C4ECC92214D4126003C61D6 /* Library */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		3C4ECC8B214D4126003C61D6 /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECC8C214D4126003C61D6 /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		3C4ECC8D214D4126003C61D6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECC8E214D4126003C61D6 /* Alipay_AntForest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3C4ECC92214D4126003C61D6 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECC93214D4126003C61D6 /* MobileSubstrate */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		3C4ECC93214D4126003C61D6 /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECC94214D4126003C61D6 /* DynamicLibraries */,
+			);
+			name = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		3C4ECC94214D4126003C61D6 /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECC95214D4126003C61D6 /* Alipay_AntForest.plist */,
+			);
+			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+		3C4ECCB3214D478D003C61D6 /* class */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECCB4214D478D003C61D6 /* H5WebViewController.h */,
+				3C4ECCB8214D478D003C61D6 /* H5WebViewController.m */,
+				3C4ECCB5214D478D003C61D6 /* APListData.m */,
+				3C4ECCB6214D478D003C61D6 /* Header.h */,
+				3C4ECCB7214D478D003C61D6 /* APListData.h */,
+				3C4ECCB9214D478D003C61D6 /* PSDJsBridge.h */,
+				3C4ECCBA214D478D003C61D6 /* AUToast.h */,
+			);
+			path = class;
+			sourceTree = "<group>";
+		};
+		3C4ECCBB214D478D003C61D6 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				3C4ECCBC214D478D003C61D6 /* NSDictionary+DLog.h */,
+				3C4ECCBD214D478D003C61D6 /* NSArray+DLog.h */,
+				3C4ECCBE214D478D003C61D6 /* NSDictionary+DLog.m */,
+				3C4ECCBF214D478D003C61D6 /* NSArray+DLog.m */,
+			);
+			path = tools;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		3C4ECC7D214D4126003C61D6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C4ECCC5214D478D003C61D6 /* PSDJsBridge.h in Headers */,
+				3C4ECCC0214D478D003C61D6 /* H5WebViewController.h in Headers */,
+				3C4ECCC2214D478D003C61D6 /* Header.h in Headers */,
+				3C4ECCC6214D478D003C61D6 /* AUToast.h in Headers */,
+				3C4ECCC3214D478D003C61D6 /* APListData.h in Headers */,
+				3C4ECCC8214D478D003C61D6 /* NSArray+DLog.h in Headers */,
+				3C4ECCC7214D478D003C61D6 /* NSDictionary+DLog.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		3C4ECC7F214D4126003C61D6 /* Alipay_AntForest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C4ECC98214D4126003C61D6 /* Build configuration list for PBXNativeTarget "Alipay_AntForest" */;
+			buildPhases = (
+				3C4ECC7A214D4126003C61D6 /* ShellScript */,
+				3C4ECC7B214D4126003C61D6 /* Sources */,
+				3C4ECC7C214D4126003C61D6 /* Frameworks */,
+				3C4ECC7D214D4126003C61D6 /* Headers */,
+				3C4ECC7E214D4126003C61D6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Alipay_AntForest;
+			productName = Alipay_AntForest;
+			productReference = 3C4ECC80214D4126003C61D6 /* Alipay_AntForest.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3C4ECC76214D4126003C61D6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				TargetAttributes = {
+					3C4ECC7F214D4126003C61D6 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3C4ECC79214D4126003C61D6 /* Build configuration list for PBXProject "Alipay_AntForest" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3C4ECC75214D4126003C61D6;
+			productRefGroup = 3C4ECC81214D4126003C61D6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3C4ECC7F214D4126003C61D6 /* Alipay_AntForest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3C4ECC7A214D4126003C61D6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/bin/md --xcbp-logos";
+		};
+		3C4ECC7E214D4126003C61D6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/MonkeyDev/bin/md --xcbp";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3C4ECC7B214D4126003C61D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C4ECCC1214D478D003C61D6 /* APListData.m in Sources */,
+				3C4ECCCA214D478D003C61D6 /* NSArray+DLog.m in Sources */,
+				3C4ECC91214D4126003C61D6 /* Alipay_AntForest.mm in Sources */,
+				3C4ECCC9214D478D003C61D6 /* NSDictionary+DLog.m in Sources */,
+				3C4ECCC4214D478D003C61D6 /* H5WebViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		3C4ECC96214D4126003C61D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(MonkeyDevPath)/frameworks/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/lib/**";
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"Alipay_AntForest\\\"\"";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3C4ECC97214D4126003C61D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(MonkeyDevPath)/frameworks/**",
+					"$(MonkeyDevTheosPath)/vendor/lib",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = "$(MonkeyDevTheosPath)/vendor/lib/**";
+				MonkeyDevPath = /opt/MonkeyDev;
+				MonkeyDevTheosPath = /opt/theos;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DTHEOS_INSTANCE_NAME=\"\\\"Alipay_AntForest\\\"\"";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+			};
+			name = Debug;
+		};
+		3C4ECC99214D4126003C61D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Alipay_AntForest/Alipay_AntForest-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				MonkeyDevBuildPackageOnAnyBuild = NO;
+				MonkeyDevClearUiCacheOnInstall = NO;
+				MonkeyDevCopyOnBuild = NO;
+				MonkeyDevDeviceIP = localhost;
+				MonkeyDevDevicePassword = alpine;
+				MonkeyDevDevicePort = 2222;
+				MonkeyDevInstallOnAnyBuild = YES;
+				MonkeyDevInstallOnProfiling = NO;
+				MonkeyDevkillProcessOnInstall = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3C4ECC9A214D4126003C61D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Alipay_AntForest/Alipay_AntForest-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				MonkeyDevBuildPackageOnAnyBuild = NO;
+				MonkeyDevClearUiCacheOnInstall = NO;
+				MonkeyDevCopyOnBuild = NO;
+				MonkeyDevDeviceIP = localhost;
+				MonkeyDevDevicePassword = alpine;
+				MonkeyDevDevicePort = 2222;
+				MonkeyDevInstallOnAnyBuild = YES;
+				MonkeyDevInstallOnProfiling = NO;
+				MonkeyDevkillProcessOnInstall = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3C4ECC79214D4126003C61D6 /* Build configuration list for PBXProject "Alipay_AntForest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C4ECC96214D4126003C61D6 /* Release */,
+				3C4ECC97214D4126003C61D6 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C4ECC98214D4126003C61D6 /* Build configuration list for PBXNativeTarget "Alipay_AntForest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C4ECC99214D4126003C61D6 /* Release */,
+				3C4ECC9A214D4126003C61D6 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3C4ECC76214D4126003C61D6 /* Project object */;
+}
