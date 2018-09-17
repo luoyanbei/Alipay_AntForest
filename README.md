@@ -1,8 +1,8 @@
 # Alipay_AntForest
 iOS版支付宝，一键收取蚂蚁森林全部好友能量，一键帮好友收取能量，定时收取能量
 
-##功能概况：
-本文代码是在[iOS支付宝蚂蚁森林能量收取助手](https://github.com/hackxhj/alipayForestTweak)源代码基础上做的新增和扩展。
+## 功能概况
+- 本文代码是在[iOS支付宝蚂蚁森林能量收取助手](https://github.com/hackxhj/alipayForestTweak)源代码基础上做的新增和扩展。
 
 - 新增功能：一键收取蚂蚁森林全部好友能量，一键帮好友收取能量，定时收取能量。
 
