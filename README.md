@@ -2,7 +2,7 @@
 iOS版支付宝，一键收取蚂蚁森林全部好友能量，一键帮好友收取能量，定时收取能量
 
 ## 功能概况
-- 本文是根据网友的iOS逆向-[手把手教你写支付宝蚂蚁森林收集能量助手做了功能完善和扩展](https://blog.csdn.net/kissing_huo/article/details/78548942?locationNum=8)，详细的分析过程，请参见该文章。
+- 本文是根据网友的 [iOS逆向-手把手教你写支付宝蚂蚁森林收集能量助手](https://blog.csdn.net/kissing_huo/article/details/78548942?locationNum=8) 做了功能完善和扩展，详细的分析过程，请参见该文章。
 
 - 新增功能：一键收取蚂蚁森林全部好友能量，一键帮好友收取能量，定时收取能量。
 
