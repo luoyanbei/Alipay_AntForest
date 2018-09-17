@@ -74,6 +74,7 @@ bubbles : [
 
 
 ## 多谢支持 ^_^
-![支付宝](./images/zhifubao@2x.png) ![微信支付](./images/wechatpay@2x.png)
+<img width="150" height="150" src="./images/zhifubao@2x.png"/>
+
 
 
