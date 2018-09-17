@@ -67,6 +67,9 @@ bubbles : [
 在界面点击"60分"按钮，可调整时间长度，即多久执行一次收取；点击“定时”则开启定时器。
 <div align=center><img width="339" height="400" src="./images/buttons@2x.png"/></div>
 
+## 开发环境
+- Xcode 8.2
+- MonkeyDev
 
 ## 测试环境
 - 越狱手机 iOS 9.3.3
