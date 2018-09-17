@@ -14,6 +14,7 @@
 #import "PSDJsBridge.h"
 #import "AUToast.h"
 #import "Header.h"
+#import "MyAutoTimerView.h"
 
 #import <substrate.h>
 #import <sys/sysctl.h>
@@ -42,7 +43,8 @@ BOOL isExecuteCollect = NO;
 NSString * myself_userid=nil;
 //进度提示
 AUToast *progressView=nil;
-
+//定时view
+MyAutoTimerView * btView=nil;
 %ctor{
 MSHookFunction((void *)MSFindSymbol(NULL,"_ptrace"),(void*)my_ptrace,(void**)&orig_ptrace);
 NSLog(@"[AntiAntiDebug] Module loaded!!!");
@@ -70,6 +72,7 @@ NSLog(@"arg1--type=(%@)\n",[arg1 class]);
 //  arg1--type=(__NSCFDictionary)
 
 id r = %orig;
+
 HBLogDebug(@"transformResponseData--return = %@", r);
 
 NSLog(@"transformResponseData----0");
@@ -93,30 +96,12 @@ NSLog(@"transformResponseData----1");
 //好友等级排名
 id friendRanking=[dic objectForKey:@"friendRanking"];//是一个数组，数组中是字典元素
 
-if(myself_userid==nil || [myself_userid isEqualToString:@""] || ![[[dic objectForKey:@"myself"] objectForKey:@"userId"] isEqualToString:@""])
+if([[dic objectForKey:@"myself"] objectForKey:@"userId"] && ![[[dic objectForKey:@"myself"] objectForKey:@"userId"] isEqualToString:@""])
 {
 myself_userid = [[[dic objectForKey:@"myself"] objectForKey:@"userId"] mutableCopy];
 NSLog(@"myself_userid=(%@)",myself_userid);
 }
 
-
-
-/*
-myself : {
-realName : 1,
-forestUser : 0,
-treeAmount : 0,
-rank : 22,
-canCollectLaterTime : -1,
-userId : 2088502521965889,
-canCollectEnergy : 0,
-collectableBubbleCount : 0,
-energySummation : 23018,
-headPortrait : ,
-displayName : 王俊,
-canHelpCollect : 0
-}
-*/
 
 if(friendRanking && [friendRanking isKindOfClass:[NSArray class]])
 {
@@ -158,7 +143,12 @@ NSLog(@"transformResponseData----3");
 //没有更多好友信息，执行收集工作
 NSLog(@"已收集全部可收集的好友=%@",jdata.topFriends);
 if(progressView)
+{
 [progressView dismissToast];
+progressView=nil;
+NSLog(@"game---over---查询好友排行榜");
+
+}
 
 //发送通知，goto获取气泡
 [[NSNotificationCenter defaultCenter] postNotificationName:@"goToCollectBublles" object:nil];
@@ -199,9 +189,13 @@ NSString *userID=[dicbulles objectForKey:@"userId"];
 NSLog(@"get--bubbles--%@",userID);
 }
 
+
 NSLog(@"transformResponseData----7");
 
 }
+
+
+
 
 return r;
 
@@ -223,6 +217,7 @@ return r;
 - (void)viewDidLoad
 {
 %orig;
+
 APListData *jdata=[APListData sharedInstance];
 jdata.topBubblesDic=[[NSMutableDictionary alloc] init];
 
@@ -243,15 +238,21 @@ btnAdd.titleLabel.font = [UIFont systemFontOfSize: 15.0];
 [btnAdd addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
 [btnAdd setBackgroundColor:[UIColor orangeColor]];
 
-UIButton *btnTest=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 210, 80, 40)];
-[btnTest setTitle:@"Test" forState:UIControlStateNormal];
-btnTest.titleLabel.font = [UIFont systemFontOfSize: 15.0];
-//[btnTest addTarget:self action:@selector(collectTopBub) forControlEvents:UIControlEventTouchUpInside];
-[btnTest setBackgroundColor:[UIColor orangeColor]];
-
 UIWebView *show=[self h5WebView];
+
 [show addSubview:btnAdd];
-//  [show addSubview:btnTest];
+
+if(!btView)
+{
+//定时view
+btView = [[MyAutoTimerView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 200, 80, 40)];
+
+btView.startBlock = ^(){[self clickBtn];};
+
+NSLog(@"do--addsubview---MyAutoTimerView");
+[show addSubview:btView];
+}
+
 }
 
 
@@ -282,8 +283,10 @@ UIWebView *show=[self h5WebView];
 APListData *jdata=[APListData sharedInstance];
 
 NSLog(@"一键收取 click:%@---%@",jdata.jsBridge,[jdata.topFriends class]);
+NSLog(@"game---over--title--查询好友排行榜");
 
-progressView=[%c(AUToast) presentToastWithText:@"收取能量中" logTag:@"1"];
+if(progressView==nil)
+progressView=[%c(AUToast) presentToastWithText:@"查询好友排行榜" logTag:@"1"];
 
 //获取排行中的用户
 [H5WebViewController getListRankingWithStartPoint:0];
@@ -299,6 +302,15 @@ progressView=[%c(AUToast) presentToastWithText:@"收取能量中" logTag:@"1"];
 %new
 -(void)goToCollectBubbles
 {
+
+if(progressView==nil)
+{
+progressView=[%c(AUToast) presentToastWithText:@"正在收取能量" logTag:@"1"];
+NSLog(@"game---over--title--正在收取能量");
+
+}
+
+
 APListData *jdata=[APListData sharedInstance];
 
 NSLog(@"do--goToCollectBubbles");
@@ -326,13 +338,17 @@ dispatch_async(dispatch_get_main_queue(), ^{
 
 //开始收集全部能量
 [H5WebViewController collectTopBub];
+NSLog(@"game---over--title--正在收取能量--2");
 
-progressView=[%c(AUToast) presentToastWithText:@"正在收取能量" logTag:@"1"];
 
 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 isExecuteCollect = NO;
 if(progressView)
+{
 [progressView dismissToast];
+progressView = nil;
+NSLog(@"game---over---正在收取能量");
+}
 });
 
 });

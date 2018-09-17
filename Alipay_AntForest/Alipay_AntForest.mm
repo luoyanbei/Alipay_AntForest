@@ -1,4 +1,4 @@
-#line 1 "/Users/king/Desktop/2017工作/阿里/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"
+#line 1 "/Users/king/Desktop/ChiJi/alipay/蚂蚁森林收取能量/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"
 
 
 #if TARGET_OS_SIMULATOR
@@ -15,6 +15,7 @@
 #import "PSDJsBridge.h"
 #import "AUToast.h"
 #import "Header.h"
+#import "MyAutoTimerView.h"
 
 #import <substrate.h>
 #import <sys/sysctl.h>
@@ -44,7 +45,8 @@ NSString * myself_userid=nil;
 
 AUToast *progressView=nil;
 
-static __attribute__((constructor)) void _logosLocalCtor_70f9104a(int __unused argc, char __unused **argv, char __unused **envp){
+MyAutoTimerView * btView=nil;
+static __attribute__((constructor)) void _logosLocalCtor_65c747d9(int __unused argc, char __unused **argv, char __unused **envp){
 MSHookFunction((void *)MSFindSymbol(NULL,"_ptrace"),(void*)my_ptrace,(void**)&orig_ptrace);
 NSLog(@"[AntiAntiDebug] Module loaded!!!");
 
@@ -72,10 +74,10 @@ NSLog(@"[AntiAntiDebug] Module loaded!!!");
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class AUToast; @class H5WebViewController; @class PSDJsBridge; 
+@class PSDJsBridge; @class H5WebViewController; @class AUToast; 
 static void (*_logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$)(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id, id); static void _logos_method$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id, id); static id (*_logos_orig$_ungrouped$PSDJsBridge$transformResponseData$)(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id); static id _logos_method$_ungrouped$PSDJsBridge$transformResponseData$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id); static void (*_logos_orig$_ungrouped$H5WebViewController$viewDidLoad)(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$viewDidLoad(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$_ungrouped$H5WebViewController$viewDidAppear$)(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, _Bool); static void _logos_method$_ungrouped$H5WebViewController$viewDidAppear$(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, _Bool); static void _logos_method$_ungrouped$H5WebViewController$clickBtn(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$goToCollectBubbles(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); 
 static __inline__ __attribute__((always_inline)) __attribute__((unused)) Class _logos_static_class_lookup$AUToast(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("AUToast"); } return _klass; }
-#line 53 "/Users/king/Desktop/2017工作/阿里/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"
+#line 55 "/Users/king/Desktop/ChiJi/alipay/蚂蚁森林收取能量/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"
 
 
 
@@ -96,6 +98,7 @@ NSLog(@"arg1--type=(%@)\n",[arg1 class]);
 
 
 id r = _logos_orig$_ungrouped$PSDJsBridge$transformResponseData$(self, _cmd, arg1);
+
 HBLogDebug(@"transformResponseData--return = %@", r);
 
 NSLog(@"transformResponseData----0");
@@ -119,29 +122,11 @@ NSLog(@"transformResponseData----1");
 
 id friendRanking=[dic objectForKey:@"friendRanking"];
 
-if(myself_userid==nil || [myself_userid isEqualToString:@""])
+if([[dic objectForKey:@"myself"] objectForKey:@"userId"] && ![[[dic objectForKey:@"myself"] objectForKey:@"userId"] isEqualToString:@""])
 {
 myself_userid = [[[dic objectForKey:@"myself"] objectForKey:@"userId"] mutableCopy];
 NSLog(@"myself_userid=(%@)",myself_userid);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if(friendRanking && [friendRanking isKindOfClass:[NSArray class]])
@@ -184,7 +169,12 @@ NSLog(@"transformResponseData----3");
 
 NSLog(@"已收集全部可收集的好友=%@",jdata.topFriends);
 if(progressView)
+{
 [progressView dismissToast];
+progressView=nil;
+NSLog(@"game---over---查询好友排行榜");
+
+}
 
 
 [[NSNotificationCenter defaultCenter] postNotificationName:@"goToCollectBublles" object:nil];
@@ -225,9 +215,13 @@ NSString *userID=[dicbulles objectForKey:@"userId"];
 NSLog(@"get--bubbles--%@",userID);
 }
 
+
 NSLog(@"transformResponseData----7");
 
 }
+
+
+
 
 return r;
 
@@ -249,6 +243,7 @@ return r;
 
 static void _logos_method$_ungrouped$H5WebViewController$viewDidLoad(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
 _logos_orig$_ungrouped$H5WebViewController$viewDidLoad(self, _cmd);
+
 APListData *jdata=[APListData sharedInstance];
 jdata.topBubblesDic=[[NSMutableDictionary alloc] init];
 
@@ -269,14 +264,20 @@ btnAdd.titleLabel.font = [UIFont systemFontOfSize: 15.0];
 [btnAdd addTarget:self action:@selector(clickBtn) forControlEvents:UIControlEventTouchUpInside];
 [btnAdd setBackgroundColor:[UIColor orangeColor]];
 
-UIButton *btnTest=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 210, 80, 40)];
-[btnTest setTitle:@"Test" forState:UIControlStateNormal];
-btnTest.titleLabel.font = [UIFont systemFontOfSize: 15.0];
-
-[btnTest setBackgroundColor:[UIColor orangeColor]];
-
 UIWebView *show=[self h5WebView];
+
 [show addSubview:btnAdd];
+
+if(!btView)
+{
+
+btView = [[MyAutoTimerView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 200, 80, 40)];
+
+btView.startBlock = ^(){[self clickBtn];};
+
+NSLog(@"do--addsubview---MyAutoTimerView");
+[show addSubview:btView];
+}
 
 }
 
@@ -308,8 +309,10 @@ UIWebView *show=[self h5WebView];
 APListData *jdata=[APListData sharedInstance];
 
 NSLog(@"一键收取 click:%@---%@",jdata.jsBridge,[jdata.topFriends class]);
+NSLog(@"game---over--title--查询好友排行榜");
 
-progressView=[_logos_static_class_lookup$AUToast() presentToastWithText:@"收取能量中" logTag:@"1"];
+if(progressView==nil)
+progressView=[_logos_static_class_lookup$AUToast() presentToastWithText:@"查询好友排行榜" logTag:@"1"];
 
 
 [H5WebViewController getListRankingWithStartPoint:0];
@@ -325,6 +328,15 @@ progressView=[_logos_static_class_lookup$AUToast() presentToastWithText:@"收取
 
 
 static void _logos_method$_ungrouped$H5WebViewController$goToCollectBubbles(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+
+if(progressView==nil)
+{
+progressView=[_logos_static_class_lookup$AUToast() presentToastWithText:@"正在收取能量" logTag:@"1"];
+NSLog(@"game---over--title--正在收取能量");
+
+}
+
+
 APListData *jdata=[APListData sharedInstance];
 
 NSLog(@"do--goToCollectBubbles");
@@ -352,13 +364,17 @@ dispatch_async(dispatch_get_main_queue(), ^{
 
 
 [H5WebViewController collectTopBub];
+NSLog(@"game---over--title--正在收取能量--2");
 
-progressView=[_logos_static_class_lookup$AUToast() presentToastWithText:@"正在收取能量" logTag:@"1"];
 
 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 isExecuteCollect = NO;
 if(progressView)
+{
 [progressView dismissToast];
+progressView = nil;
+NSLog(@"game---over---正在收取能量");
+}
 });
 
 });
@@ -375,4 +391,4 @@ if(progressView)
 
 static __attribute__((constructor)) void _logosLocalInit() {
 {Class _logos_class$_ungrouped$PSDJsBridge = objc_getClass("PSDJsBridge"); MSHookMessageEx(_logos_class$_ungrouped$PSDJsBridge, @selector(_doFlushMessageQueue:url:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$, (IMP*)&_logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$);MSHookMessageEx(_logos_class$_ungrouped$PSDJsBridge, @selector(transformResponseData:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$transformResponseData$, (IMP*)&_logos_orig$_ungrouped$PSDJsBridge$transformResponseData$);Class _logos_class$_ungrouped$H5WebViewController = objc_getClass("H5WebViewController"); MSHookMessageEx(_logos_class$_ungrouped$H5WebViewController, @selector(viewDidLoad), (IMP)&_logos_method$_ungrouped$H5WebViewController$viewDidLoad, (IMP*)&_logos_orig$_ungrouped$H5WebViewController$viewDidLoad);MSHookMessageEx(_logos_class$_ungrouped$H5WebViewController, @selector(viewDidAppear:), (IMP)&_logos_method$_ungrouped$H5WebViewController$viewDidAppear$, (IMP*)&_logos_orig$_ungrouped$H5WebViewController$viewDidAppear$);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(clickBtn), (IMP)&_logos_method$_ungrouped$H5WebViewController$clickBtn, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(goToCollectBubbles), (IMP)&_logos_method$_ungrouped$H5WebViewController$goToCollectBubbles, _typeEncoding); }} }
-#line 350 "/Users/king/Desktop/2017工作/阿里/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"
+#line 366 "/Users/king/Desktop/ChiJi/alipay/蚂蚁森林收取能量/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"

@@ -53,15 +53,9 @@
 //帮助他人收取能量
 +(void)helpCollectBubbles:(id)mbrige bubbleId:(NSString*)bID userId :(NSString*)userID
 {
-    /*
-     -[<PSDJsBridge: 0x1299a5820> _doFlushMessageQueue:[{"handlerName":"rpc","data":{"operationType":"alipay.antmember.forest.h5.forFriendCollectEnergy","requestData":[{"targetUserId":2088802090147452,"bubbleIds":[76992150],"av":"5","ct":"ios"}],"disableLimitView":true},"callbackId":"rpc_15371070827940.6636699589435011"}] url:https://60000002.h5app.alipay.com/app/src/home.html?userId=2088802090147452]
-     
-     PSDJsBridge: 0x1299a5820> _doFlushMessageQueue:[{"handlerName":"remoteLog","data":{"seedId":"ANTFOREST-BEHAVIOR-CLICK-COLLECT","param1":"shareBiz=none^bubbleId=76992150^actionUserId=2088802090147452^type=behavior^currentTimestamp=1537107082795","param2":"monitor_type=clicked^remoteType=info^pageName=home.html^pageState=friend2088802090147452_enterhomeOff","bizType":"antForest"},"callbackId":"remoteLog_15371070827960.6548483946826309"}] url:https://60000002.h5app.alipay.com/app/src/home.html?userId=2088802090147452]
-     */
+    
     NSLog(@"help--(%@)--collect--(%@)",userID,bID);
     
-    
-
     
     long timems=[[NSDate  date] timeIntervalSince1970]*1000;
     NSString *timeStamp = [NSString stringWithFormat:@"%ld", timems];

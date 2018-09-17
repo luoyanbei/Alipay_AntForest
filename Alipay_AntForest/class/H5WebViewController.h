@@ -33,7 +33,7 @@
 
 -(void)testDTRpcOperation;
 +(void)getListRankingWithStartPoint:(int)startpoint;
-
+- (void)clickBtn;
 
 @end
 
