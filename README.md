@@ -65,14 +65,15 @@ bubbles : [
 
 - 4、定时收取能量
 在界面点击"60分"按钮，可调整时间长度，即多久执行一次收取；点击“定时”则开启定时器。
-![界面](./images/buttons.png)
+![界面](./images/buttons@2x.png)
 
 
-##测试环境
+## 测试环境
 - 越狱手机 iOS 9.3.3
 - 支付宝版本 10.1.32
 
+
 ## 多谢打赏 ^_^
-![支付宝](./images/zhifubao.png) ![微信](./images/wechatpay.png)
+![支付宝](./images/zhifubao@2x.png) ![微信](./images/wechatpay@2x.png)
 
 
