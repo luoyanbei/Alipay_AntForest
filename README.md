@@ -65,7 +65,7 @@ bubbles : [
 
 - 4、定时收取能量
 在界面点击"60分"按钮，可调整时间长度，即多久执行一次收取；点击“定时”则开启定时器。
-<img width="339" height="400" src="./images/buttons@2x.png"/>
+<div align=center><img width="339" height="400" src="./images/buttons@2x.png"/></div>
 
 
 ## 测试环境
@@ -74,7 +74,7 @@ bubbles : [
 
 
 ## 多谢支持 ^_^
-<img width="240" height="200" src="./images/zhifubao@2x.png"/><\t><img width="240" height="200" src="./images/wechatpay@2x.png"/>
+<div align=center><img width="240" height="200" src="./images/zhifubao@2x.png"/><t/><img width="240" height="200" src="./images/wechatpay@2x.png"/></div>
 
 
 
