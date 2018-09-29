@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C442EB4215F1F5100F526FE /* MyAutoTimerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C442EB2215F1F5100F526FE /* MyAutoTimerView.m */; };
+		3C442EB5215F1F5100F526FE /* MyAutoTimerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C442EB3215F1F5100F526FE /* MyAutoTimerView.h */; };
 		3C4ECC84214D4126003C61D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4ECC83214D4126003C61D6 /* UIKit.framework */; };
 		3C4ECC86214D4126003C61D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4ECC85214D4126003C61D6 /* Foundation.framework */; };
 		3C4ECC88214D4126003C61D6 /* CydiaSubstrate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C4ECC87214D4126003C61D6 /* CydiaSubstrate.framework */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3C442EB2215F1F5100F526FE /* MyAutoTimerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAutoTimerView.m; sourceTree = "<group>"; };
+		3C442EB3215F1F5100F526FE /* MyAutoTimerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAutoTimerView.h; sourceTree = "<group>"; };
 		3C4ECC80214D4126003C61D6 /* Alipay_AntForest.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = Alipay_AntForest.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C4ECC83214D4126003C61D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3C4ECC85214D4126003C61D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -153,6 +157,8 @@
 		3C4ECCB3214D478D003C61D6 /* class */ = {
 			isa = PBXGroup;
 			children = (
+				3C442EB3215F1F5100F526FE /* MyAutoTimerView.h */,
+				3C442EB2215F1F5100F526FE /* MyAutoTimerView.m */,
 				3C4ECCB4214D478D003C61D6 /* H5WebViewController.h */,
 				3C4ECCB8214D478D003C61D6 /* H5WebViewController.m */,
 				3C4ECCB5214D478D003C61D6 /* APListData.m */,
@@ -184,6 +190,7 @@
 			files = (
 				3C4ECCC5214D478D003C61D6 /* PSDJsBridge.h in Headers */,
 				3C4ECCC0214D478D003C61D6 /* H5WebViewController.h in Headers */,
+				3C442EB5215F1F5100F526FE /* MyAutoTimerView.h in Headers */,
 				3C4ECCC2214D478D003C61D6 /* Header.h in Headers */,
 				3C4ECCC6214D478D003C61D6 /* AUToast.h in Headers */,
 				3C4ECCC3214D478D003C61D6 /* APListData.h in Headers */,
@@ -282,6 +289,7 @@
 				3C4ECCC1214D478D003C61D6 /* APListData.m in Sources */,
 				3C4ECCCA214D478D003C61D6 /* NSArray+DLog.m in Sources */,
 				3C4ECC91214D4126003C61D6 /* Alipay_AntForest.mm in Sources */,
+				3C442EB4215F1F5100F526FE /* MyAutoTimerView.m in Sources */,
 				3C4ECCC9214D478D003C61D6 /* NSDictionary+DLog.m in Sources */,
 				3C4ECCC4214D478D003C61D6 /* H5WebViewController.m in Sources */,
 			);
