@@ -5,4 +5,10 @@
 #ifdef __OBJC__
     #import <Foundation/Foundation.h>
     #import "/opt/theos/Prefix.pch"  //path/to/theos/Prefix.pch
+
+#define TheBlueColor [UIColor colorWithRed:0/255.0 green:153/255.0 blue:255/255.0 alpha:0.9]
+//浇水好友列表保存路径
+#define WaterFriendListPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES)lastObject] stringByAppendingPathComponent:@"WaterFriendList.txt"]
+
+
 #endif

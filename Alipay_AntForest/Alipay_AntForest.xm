@@ -18,13 +18,18 @@
 
 #import <substrate.h>
 #import <sys/sysctl.h>
+
+
 static int (*orig_ptrace) (int request, pid_t pid, caddr_t addr, int data);
 
-static int my_ptrace (int request, pid_t pid, caddr_t addr, int data){
-if(request == 31){
+static int my_ptrace (int request, pid_t pid, caddr_t addr, int data)
+{
+if(request == 31)
+{
 NSLog(@"[AntiAntiDebug] - ptrace request is PT_DENY_ATTACH");
 return 0;
 }
+
 return orig_ptrace(request,pid,addr,data);
 
 }
@@ -45,6 +50,12 @@ NSString * myself_userid=nil;
 AUToast *progressView=nil;
 //定时view
 MyAutoTimerView * btView=nil;
+//当前好友的userid
+NSString * currentFriendUserID = nil;
+
+
+
+
 %ctor{
 MSHookFunction((void *)MSFindSymbol(NULL,"_ptrace"),(void*)my_ptrace,(void**)&orig_ptrace);
 NSLog(@"[AntiAntiDebug] Module loaded!!!");
@@ -56,29 +67,51 @@ NSLog(@"[AntiAntiDebug] Module loaded!!!");
 
 - (void)_doFlushMessageQueue:(id)arg1 url:(id)arg2
 {
+NSLog(@"_doFlushMessageQueue---arg1.class=(%@);arg2.class=(%@)",[arg1 class],[arg2 class]);
+
+//获取当前好友的userid
+if(arg1!=nil&&[arg1 isKindOfClass:[NSString class]] && [arg1 containsString:@"[{\"handlerName\":\"pushWindow\",\"data\":{\"url\":\"home.html?userId="])
+{
+
+
+NSLog(@"currentFriendUserID---receive---1");
+currentFriendUserID = [handleCurrentFriendUserIdWithStr(arg1) mutableCopy];
+NSLog(@"currentFriendUserID---receive---1--currentFriendUserID=(%@)",currentFriendUserID);
+
+}
+
+
 
 %log;
+
 %orig;
 
 }
 
 
 
-- (id)transformResponseData:(id)arg1
+
+-(id)transformResponseData:(id)arg1
 {
 
 %log;
-NSLog(@"arg1--type=(%@)\n",[arg1 class]);
+
+
+NSLog(@"transformResponseData---arg1--type=(%@)\n",[arg1 class]);
 //  arg1--type=(__NSCFDictionary)
+//NSLog(@"transformResponseData---arg1=(%@)\n",arg1);
 
 id r = %orig;
 
-HBLogDebug(@"transformResponseData--return = %@", r);
+//HBLogDebug(@"transformResponseData--return = %@", r);
 
 NSLog(@"transformResponseData----0");
 
 APListData *jdata=[APListData sharedInstance];
+
 jdata.jsBridge=self;
+
+
 
 if(!isExecuteCollect)//是否执行一键收集
 {
@@ -206,12 +239,6 @@ return r;
 
 
 
-
-
-
-
-
-
 %hook H5WebViewController
 
 - (void)viewDidLoad
@@ -253,6 +280,27 @@ NSLog(@"do--addsubview---MyAutoTimerView");
 [show addSubview:btView];
 }
 
+
+UIButton *btnWater=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 250, 80, 40)];
+[btnWater setTitle:@"一键浇水" forState:UIControlStateNormal];
+btnWater.titleLabel.font = [UIFont systemFontOfSize: 15.0];
+[btnWater addTarget:self action:@selector(bluewaterBtnClick) forControlEvents:UIControlEventTouchUpInside];
+[btnWater setBackgroundColor:TheBlueColor];
+
+[show addSubview:btnWater];
+//添加当前好友到“浇水”
+UIButton *btnAddWater=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 300, 80, 40)];
+[btnAddWater setTitle:@"加入浇水" forState:UIControlStateNormal];
+btnAddWater.font = [UIFont systemFontOfSize:15.0];
+[btnAddWater addTarget:self action:@selector(btnAddWaterClick) forControlEvents:UIControlEventTouchUpInside];
+[btnAddWater setBackgroundColor:TheBlueColor];
+
+[show addSubview:btnAddWater];
+
+
+
+
+
 }
 
 
@@ -261,6 +309,56 @@ return;
 
 }
 
+//把当前好友加入一键浇水中
+%new
+-(void)btnAddWaterClick
+{
+    NSLog(@"btnAddWaterClick---1");
+
+    if(currentFriendUserID)
+    {
+        NSLog(@"btnAddWaterClick---2");
+
+        BOOL result = saveWaterFriendListToFile(currentFriendUserID);
+        NSString * message = result?@"添加成功":@"添加失败";
+        UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        [alert show];
+    }
+
+    NSLog(@"btnAddWaterClick---3");
+
+}
+//执行一键浇水
+%new
+-(void)bluewaterBtnClick
+{
+
+NSLog(@"waterTree---do---1");
+
+if(progressView==nil)
+progressView=[%c(AUToast) presentToastWithText:@"正在为好友浇水" logTag:@"1"];
+
+NSMutableArray * friendArray = readWaterFriendListFromFile();
+for(NSString * userid in friendArray)
+{
+if(userid && ![userid isEqualToString:@""])
+{
+[H5WebViewController waterTreeWithUserId:userid];
+NSLog(@"waterTree---do---2---userid=(%@)",userid);
+
+}
+}
+NSLog(@"waterTree---do---3");
+
+if(progressView)
+{
+[progressView dismissToast];
+progressView = nil;
+NSLog(@"game---over---正在为好友浇水");
+}
+
+
+}
 
 
 %new

@@ -53,9 +53,7 @@
 //帮助他人收取能量
 +(void)helpCollectBubbles:(id)mbrige bubbleId:(NSString*)bID userId :(NSString*)userID
 {
-    
     NSLog(@"help--(%@)--collect--(%@)",userID,bID);
-    
     
     long timems=[[NSDate  date] timeIntervalSince1970]*1000;
     NSString *timeStamp = [NSString stringWithFormat:@"%ld", timems];
@@ -83,7 +81,6 @@
     NSString *arg2=[NSString stringWithFormat:@"https://60000002.h5app.alipay.com/app/src/home.html?userId=%@",userID];
     PSDJsBridge *jsB=mbrige;
     [jsB _doFlushMessageQueue:arg1 url:arg2];
-    
     
 }
 
@@ -142,6 +139,46 @@
     }
 }
 
+//浇水
++(void)waterTreeWithUserId:(NSString*)userID
+{
+    APListData *jdata=[APListData sharedInstance];
+
+    //浇水三次
+    for(int i=0; i<3; i++)
+    {
+        long timems=[[NSDate  date] timeIntervalSince1970]*1000;
+        NSString *timeStamp = [NSString stringWithFormat:@"%ld", timems];
+        NSString *randNum=[H5WebViewController getNumberRandom:16];
+        
+        NSString *arg1=[NSString stringWithFormat:@"[{\"handlerName\":\"remoteLog\",\"data\":{\"seedId\":\"ANTFOREST-BEHAVIOR-CLICK-WATER\",\"param1\":\"shareBiz=none^type=behavior^currentTimestamp=%@\",\"param2\":\"monitor_type=clicked^remoteType=info^pageName=home.html^pageState=friend%@_enterhomeOff\",\"bizType\":\"antForest\"},\"callbackId\":\"remoteLog_15386245793000.%@\"}]",timeStamp,userID,randNum];
+        
+        NSString *url_1=[NSString stringWithFormat:@"https://60000002.h5app.alipay.com/app/src/home.html?userId=%@",userID];
+        
+        PSDJsBridge *jsB=jdata.jsBridge;
+        
+        NSLog(@"waterTreeWithUserId---jsbB = (%@)",jsB);
+        
+        long timems2=[[NSDate  date] timeIntervalSince1970]*1000;
+        NSString *timeStamp2 = [NSString stringWithFormat:@"%ld", timems2];
+        NSString *randNum2 = [H5WebViewController getNumberRandom:16];
+        //
+        NSString *arg2=[NSString stringWithFormat:@"[{\"handlerName\":\"rpc\",\"data\":{\"operationType\":\"alipay.antmember.forest.h5.transferEnergy\",\"requestData\":[{\"targetUser\":\"%@\",\"transferType\":\"WATERING\",\"bizNo\":\"2b05624b-330d-47ac-a22c-0713a204567a-%@\",\"av\":\"5\",\"ct\":\"ios\"}],\"disableLimitView\":true},\"callbackId\":\"rpc_15386245793050.%@\"}]",userID,timeStamp2,randNum2];
+        
+        [jsB _doFlushMessageQueue:arg2 url:url_1];
+        
+        [NSThread sleepForTimeInterval:0.1];
+        
+        [jsB _doFlushMessageQueue:arg1 url:url_1];
+        
+        [NSThread sleepForTimeInterval:0.2];
+
+    }
+    
+    
+    
+    
+}
 
 
 @end

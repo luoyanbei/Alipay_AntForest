@@ -34,6 +34,7 @@
 -(void)testDTRpcOperation;
 +(void)getListRankingWithStartPoint:(int)startpoint;
 - (void)clickBtn;
++(void)waterTreeWithUserId:(NSString*)userID;
 
 @end
 
