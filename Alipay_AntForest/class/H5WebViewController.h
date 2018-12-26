@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "APListData.h"
 #import "PSDJsBridge.h"
+#import "Friend.h"
+#import "Bubble.h"
 
 @interface H5WebViewController : UIViewController 
 {
@@ -36,5 +38,6 @@
 - (void)clickBtn;
 +(void)waterTreeWithUserId:(NSString*)userID;
 
+-(void)collectEnergy;
 @end
 

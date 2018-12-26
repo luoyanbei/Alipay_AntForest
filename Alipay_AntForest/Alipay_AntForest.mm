@@ -1,4 +1,4 @@
-#line 1 "/Users/king/Downloads/0迅雷下载/Alipay_AntForest-master/Alipay_AntForest/Alipay_AntForest.xm"
+#line 1 "/Volumes/WangJun/文件/0工作/Alipay_AntForest-master/Alipay_AntForest/Alipay_AntForest.xm"
 
 
 #if TARGET_OS_SIMULATOR
@@ -16,6 +16,9 @@
 #import "AUToast.h"
 #import "Header.h"
 #import "MyAutoTimerView.h"
+
+#import "Friend.h"
+#import "Bubble.h"
 
 #import <substrate.h>
 #import <sys/sysctl.h>
@@ -57,9 +60,23 @@ NSString * currentFriendUserID = nil;
 
 
 
-static __attribute__((constructor)) void _logosLocalCtor_6ca8ff0a(int __unused argc, char __unused **argv, char __unused **envp){
+static __attribute__((constructor)) void _logosLocalCtor_8b131269(int __unused argc, char __unused **argv, char __unused **envp){
 MSHookFunction((void *)MSFindSymbol(NULL,"_ptrace"),(void*)my_ptrace,(void**)&orig_ptrace);
 NSLog(@"[AntiAntiDebug] Module loaded!!!");
+
+
+NSString *homePath = NSHomeDirectory();
+NSLog(@"home根目录:%@", homePath);
+
+
+
+
+
+
+NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+NSLog(@"documens路径:%@", documentPath);
+
+
 
 }
 
@@ -85,10 +102,10 @@ NSLog(@"[AntiAntiDebug] Module loaded!!!");
 #define _LOGOS_RETURN_RETAINED
 #endif
 
-@class PSDJsBridge; @class H5WebViewController; @class AUToast; 
-static void (*_logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$)(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id, id); static void _logos_method$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id, id); static id (*_logos_orig$_ungrouped$PSDJsBridge$transformResponseData$)(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id); static id _logos_method$_ungrouped$PSDJsBridge$transformResponseData$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id); static void (*_logos_orig$_ungrouped$H5WebViewController$viewDidLoad)(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$viewDidLoad(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$_ungrouped$H5WebViewController$viewDidAppear$)(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, _Bool); static void _logos_method$_ungrouped$H5WebViewController$viewDidAppear$(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, _Bool); static void _logos_method$_ungrouped$H5WebViewController$btnAddWaterClick(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$bluewaterBtnClick(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$clickBtn(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$goToCollectBubbles(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); 
+@class AUToast; @class H5WebViewController; @class PSDJsBridge; 
+static void (*_logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$)(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id, id); static void _logos_method$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id, id); static void _logos_method$_ungrouped$PSDJsBridge$saveFriendsInfo$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, NSArray *); static void _logos_method$_ungrouped$PSDJsBridge$saveBubblesInfo$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, NSArray *); static id (*_logos_orig$_ungrouped$PSDJsBridge$transformResponseData$)(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id); static id _logos_method$_ungrouped$PSDJsBridge$transformResponseData$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id); static void (*_logos_orig$_ungrouped$H5WebViewController$viewDidLoad)(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$viewDidLoad(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$_ungrouped$H5WebViewController$viewDidAppear$)(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, _Bool); static void _logos_method$_ungrouped$H5WebViewController$viewDidAppear$(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, _Bool); static void _logos_method$_ungrouped$H5WebViewController$btnAddWaterClick(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$bluewaterBtnClick(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$clickBtn(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$goToCollectBubbles(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$collectEnergy(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); 
 static __inline__ __attribute__((always_inline)) __attribute__((unused)) Class _logos_static_class_lookup$AUToast(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("AUToast"); } return _klass; }
-#line 66 "/Users/king/Downloads/0迅雷下载/Alipay_AntForest-master/Alipay_AntForest/Alipay_AntForest.xm"
+#line 83 "/Volumes/WangJun/文件/0工作/Alipay_AntForest-master/Alipay_AntForest/Alipay_AntForest.xm"
 
 
 
@@ -117,6 +134,28 @@ _logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$(self, _cmd, arg1, a
 
 
 
+static void _logos_method$_ungrouped$PSDJsBridge$saveFriendsInfo$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, NSArray * array) {
+    for(int i=0; i< [array count]; i++)
+    {
+        Friend * f = [Friend creatWithDic:array[i]];
+        [f bg_saveOrUpdate];
+    }
+}
+
+
+
+
+static void _logos_method$_ungrouped$PSDJsBridge$saveBubblesInfo$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, NSArray * array) {
+    for(int i=0; i< [array count]; i++)
+    {
+        Bubble * b = [Bubble creatWithDic:array[i]];
+        [b bg_saveOrUpdate];
+    }
+}
+
+
+
+
 
 static id _logos_method$_ungrouped$PSDJsBridge$transformResponseData$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, id arg1) {
 
@@ -124,6 +163,12 @@ HBLogDebug(@"-[<PSDJsBridge: %p> transformResponseData:%@]", self, arg1);
 
 
 NSLog(@"transformResponseData---arg1--type=(%@)\n",[arg1 class]);
+
+
+
+
+NSLog(@"transformResponseData---arg1=(%@)\n",arg1);
+
 
 
 
@@ -136,8 +181,6 @@ NSLog(@"transformResponseData----0");
 APListData *jdata=[APListData sharedInstance];
 
 jdata.jsBridge=self;
-
-
 
 if(!isExecuteCollect)
 {
@@ -169,58 +212,41 @@ NSLog(@"transformResponseData----2");
 if(jdata.topFriends == nil)
 {
 jdata.topFriends = [[NSMutableArray alloc] init];
+NSLog(@"查询好友排行---初始化jdata.topFriends");
 }
 
 
-for(NSDictionary * dic in friendRanking)
-{
-if([dic[@"canCollectEnergy"] intValue]==1 || [dic[@"canHelpCollect"] intValue]==1 || [dic[@"userId"] isEqualToString:myself_userid])
-{
-BOOL isExist = NO;
-for(NSDictionary * fdic in jdata.topFriends)
-{
-if([fdic[@"userId"] isEqualToString:dic[@"userId"]])
-{
-isExist = YES;
-break;
-}
-}
-if(!isExist)
-{
+[self saveFriendsInfo:friendRanking];
 
-[jdata.topFriends addObject:dic];
-}
-}
 
-}
 
-NSLog(@"好友排名个数=（%d）",(int)[jdata.topFriends count]);
 
 if([dic[@"hasMore"] intValue]==0)
 {
-NSLog(@"transformResponseData----3");
+    NSLog(@"transformResponseData----3");
+    
+    NSLog(@"已收集全部可收集的好友=%@",jdata.topFriends);
+    if(progressView)
+    {
+        [progressView dismissToast];
+        progressView=nil;
+        NSLog(@"game---over---查询好友排行榜");
 
-NSLog(@"已收集全部可收集的好友=%@",jdata.topFriends);
-if(progressView)
-{
-[progressView dismissToast];
-progressView=nil;
-NSLog(@"game---over---查询好友排行榜");
+    }
 
-}
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"goToCollectBublles" object:nil];
 
-
-[[NSNotificationCenter defaultCenter] postNotificationName:@"goToCollectBublles" object:nil];
 }
 else
 {
-NSLog(@"transformResponseData----4");
+    NSLog(@"transformResponseData----4");
+    
+    
+    int nextPoint = [dic[@"nextStartPoint"] intValue];
+    NSLog(@"加载更多好友信息---%d",nextPoint);
 
-
-int nextPoint = [dic[@"nextStartPoint"] intValue];
-NSLog(@"加载更多好友信息---%d",nextPoint);
-
-[H5WebViewController getListRankingWithStartPoint:nextPoint];
+    [H5WebViewController getListRankingWithStartPoint:nextPoint];
 }
 
 NSLog(@"transformResponseData----5");
@@ -238,23 +264,15 @@ if(![userbubbles isKindOfClass:[NSArray class]]||[userbubbles count]<=0)
 return r;
 
 
+[self saveBubblesInfo:userbubbles];
+
 NSLog(@"transformResponseData----6.1");
 
-NSLog(@"发现能量了---------%@",userbubbles);
-NSDictionary *dicbulles=[userbubbles objectAtIndex:0];
-NSString *userID=[dicbulles objectForKey:@"userId"];
-
-[jdata.topBubblesDic setObject:userbubbles forKey:userID];
-NSLog(@"get--bubbles--%@",userID);
 }
-
 
 NSLog(@"transformResponseData----7");
 
 }
-
-
-
 
 return r;
 
@@ -280,6 +298,7 @@ isFirstDoStartRequest = YES;
 
 
 static void _logos_method$_ungrouped$H5WebViewController$viewDidAppear$(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, _Bool arg1) {
+
 _logos_orig$_ungrouped$H5WebViewController$viewDidAppear$(self, _cmd, arg1);
 UILabel *showlb=[self webviewDomainLabel];
 
@@ -300,11 +319,12 @@ if(!btView)
 
 btView = [[MyAutoTimerView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 200, 80, 40)];
 
-btView.startBlock = ^(){[self clickBtn];};
+btView.startBlock = ^(){[self collectEnergy];};
 
 NSLog(@"do--addsubview---MyAutoTimerView");
-[show addSubview:btView];
 }
+[show addSubview:btView];
+
 
 
 UIButton *btnWater=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 250, 80, 40)];
@@ -425,7 +445,9 @@ progressView=[_logos_static_class_lookup$AUToast() presentToastWithText:@"查询
 
 
 
+
 static void _logos_method$_ungrouped$H5WebViewController$goToCollectBubbles(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+
 
 if(progressView==nil)
 {
@@ -441,10 +463,14 @@ NSLog(@"do--goToCollectBubbles");
 
 int count=1;
 
-for(NSDictionary *key in jdata.topFriends)
+
+
+
+NSArray * finfAlls = [Friend bg_findAll:@"Friend"];
+
+for(Friend *fd in finfAlls)
 {
-NSDictionary *dic2=key;
-NSString *userID=[dic2 objectForKey:@"userId"];
+NSString *userID=[fd userId];
 
 [H5WebViewController getTopUserBubbles:jdata.jsBridge userId:userID];
 NSLog(@"这是第%d波用户获取能量",count);
@@ -461,9 +487,8 @@ dispatch_async(dispatch_get_global_queue(0, 0), ^{
 dispatch_async(dispatch_get_main_queue(), ^{
 
 
-[H5WebViewController collectTopBub];
 NSLog(@"game---over--title--正在收取能量--2");
-
+[self collectEnergy];
 
 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 isExecuteCollect = NO;
@@ -483,10 +508,21 @@ NSLog(@"game---over---正在收取能量");
 
 
 
+static void _logos_method$_ungrouped$H5WebViewController$collectEnergy(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+
+showMessageWithFrameY(@"正在收取能量", 4, 16,150);
+
+NSLog(@"do--collectEnergy--1");
+
+[H5WebViewController collectTopBub];
+
+}
+
+
 
 
 
 
 static __attribute__((constructor)) void _logosLocalInit() {
-{Class _logos_class$_ungrouped$PSDJsBridge = objc_getClass("PSDJsBridge"); MSHookMessageEx(_logos_class$_ungrouped$PSDJsBridge, @selector(_doFlushMessageQueue:url:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$, (IMP*)&_logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$);MSHookMessageEx(_logos_class$_ungrouped$PSDJsBridge, @selector(transformResponseData:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$transformResponseData$, (IMP*)&_logos_orig$_ungrouped$PSDJsBridge$transformResponseData$);Class _logos_class$_ungrouped$H5WebViewController = objc_getClass("H5WebViewController"); MSHookMessageEx(_logos_class$_ungrouped$H5WebViewController, @selector(viewDidLoad), (IMP)&_logos_method$_ungrouped$H5WebViewController$viewDidLoad, (IMP*)&_logos_orig$_ungrouped$H5WebViewController$viewDidLoad);MSHookMessageEx(_logos_class$_ungrouped$H5WebViewController, @selector(viewDidAppear:), (IMP)&_logos_method$_ungrouped$H5WebViewController$viewDidAppear$, (IMP*)&_logos_orig$_ungrouped$H5WebViewController$viewDidAppear$);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(btnAddWaterClick), (IMP)&_logos_method$_ungrouped$H5WebViewController$btnAddWaterClick, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(bluewaterBtnClick), (IMP)&_logos_method$_ungrouped$H5WebViewController$bluewaterBtnClick, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(clickBtn), (IMP)&_logos_method$_ungrouped$H5WebViewController$clickBtn, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(goToCollectBubbles), (IMP)&_logos_method$_ungrouped$H5WebViewController$goToCollectBubbles, _typeEncoding); }} }
-#line 464 "/Users/king/Downloads/0迅雷下载/Alipay_AntForest-master/Alipay_AntForest/Alipay_AntForest.xm"
+{Class _logos_class$_ungrouped$PSDJsBridge = objc_getClass("PSDJsBridge"); MSHookMessageEx(_logos_class$_ungrouped$PSDJsBridge, @selector(_doFlushMessageQueue:url:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$, (IMP*)&_logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSArray *), strlen(@encode(NSArray *))); i += strlen(@encode(NSArray *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$PSDJsBridge, @selector(saveFriendsInfo:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$saveFriendsInfo$, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSArray *), strlen(@encode(NSArray *))); i += strlen(@encode(NSArray *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$PSDJsBridge, @selector(saveBubblesInfo:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$saveBubblesInfo$, _typeEncoding); }MSHookMessageEx(_logos_class$_ungrouped$PSDJsBridge, @selector(transformResponseData:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$transformResponseData$, (IMP*)&_logos_orig$_ungrouped$PSDJsBridge$transformResponseData$);Class _logos_class$_ungrouped$H5WebViewController = objc_getClass("H5WebViewController"); MSHookMessageEx(_logos_class$_ungrouped$H5WebViewController, @selector(viewDidLoad), (IMP)&_logos_method$_ungrouped$H5WebViewController$viewDidLoad, (IMP*)&_logos_orig$_ungrouped$H5WebViewController$viewDidLoad);MSHookMessageEx(_logos_class$_ungrouped$H5WebViewController, @selector(viewDidAppear:), (IMP)&_logos_method$_ungrouped$H5WebViewController$viewDidAppear$, (IMP*)&_logos_orig$_ungrouped$H5WebViewController$viewDidAppear$);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(btnAddWaterClick), (IMP)&_logos_method$_ungrouped$H5WebViewController$btnAddWaterClick, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(bluewaterBtnClick), (IMP)&_logos_method$_ungrouped$H5WebViewController$bluewaterBtnClick, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(clickBtn), (IMP)&_logos_method$_ungrouped$H5WebViewController$clickBtn, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(goToCollectBubbles), (IMP)&_logos_method$_ungrouped$H5WebViewController$goToCollectBubbles, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(collectEnergy), (IMP)&_logos_method$_ungrouped$H5WebViewController$collectEnergy, _typeEncoding); }} }
+#line 500 "/Volumes/WangJun/文件/0工作/Alipay_AntForest-master/Alipay_AntForest/Alipay_AntForest.xm"

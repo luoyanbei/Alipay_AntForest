@@ -7,6 +7,8 @@
 
 #import "MyAutoTimerView.h"
 
+#define SECONDS 10
+
 @interface MyAutoTimerView()
 
 @property(nonatomic,assign)int minutes;
@@ -33,17 +35,18 @@
         float btnWidth = frame.size.width*0.5;
         float btnHeight = frame.size.height;
         
-        _minutes = 1;
+        _minutes = 10;
+        _seconds = SECONDS;
         _status = NO;
         
         if(_minuteBtn==nil)
         {
             UIButton * btn = [UIButton buttonWithType:UIButtonTypeSystem];
-            [btn setTitle:[NSString stringWithFormat:@"%d分",_minutes] forState:UIControlStateNormal];
+            [btn setTitle:[NSString stringWithFormat:@"%d秒",_seconds] forState:UIControlStateNormal];
             [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [btn setBackgroundColor:[UIColor redColor]];
             btn.frame = CGRectMake(0, 0, btnWidth, btnHeight);
-            [btn addTarget:self action:@selector(minuteBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+            //[btn addTarget:self action:@selector(minuteBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             
             _minuteBtn = btn;
 
@@ -83,7 +86,7 @@
         //分钟按钮设为不可点击
         [self.minuteBtn setUserInteractionEnabled:NO];
         
-        self.seconds= self.minutes*60;
+        self.seconds= SECONDS;
         
         if(!self.myTimer)
         {
@@ -129,7 +132,7 @@
         {
             NSLog(@"do--block--2");
             _startBlock();
-            self.seconds=self.minutes*60;
+            self.seconds=SECONDS;
 
         }
         else

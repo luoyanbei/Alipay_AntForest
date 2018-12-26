@@ -16,6 +16,9 @@
 #import "Header.h"
 #import "MyAutoTimerView.h"
 
+#import "Friend.h"
+#import "Bubble.h"
+
 #import <substrate.h>
 #import <sys/sysctl.h>
 
@@ -60,6 +63,20 @@ NSString * currentFriendUserID = nil;
 MSHookFunction((void *)MSFindSymbol(NULL,"_ptrace"),(void*)my_ptrace,(void**)&orig_ptrace);
 NSLog(@"[AntiAntiDebug] Module loaded!!!");
 
+//1.获取沙盒数据容器根目录
+NSString *homePath = NSHomeDirectory();
+NSLog(@"home根目录:%@", homePath);
+//2.获取Documents路径
+/*参数一：指定要搜索的文件夹枚举值
+参数二：指定搜索的域Domian: NSUserDomainMask
+参数三：是否需要绝对/全路径：NO：波浪线~标识数据容器的根目录; YES(一般制定): 全路径
+*/
+
+NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+NSLog(@"documens路径:%@", documentPath);
+
+
+
 }
 
 
@@ -88,9 +105,31 @@ NSLog(@"currentFriendUserID---receive---1--currentFriendUserID=(%@)",currentFrie
 
 }
 
+%new
+//存储好友信息
+-(void)saveFriendsInfo:(NSArray *)array
+{
+    for(int i=0; i< [array count]; i++)
+    {
+        Friend * f = [Friend creatWithDic:array[i]];
+        [f bg_saveOrUpdate];
+    }
+}
+
+%new
+//保存能量气泡
+-(void)saveBubblesInfo:(NSArray *)array
+{
+    for(int i=0; i< [array count]; i++)
+    {
+        Bubble * b = [Bubble creatWithDic:array[i]];
+        [b bg_saveOrUpdate];
+    }
+}
 
 
 
+//网络response信息转换
 -(id)transformResponseData:(id)arg1
 {
 
@@ -99,7 +138,13 @@ NSLog(@"currentFriendUserID---receive---1--currentFriendUserID=(%@)",currentFrie
 
 NSLog(@"transformResponseData---arg1--type=(%@)\n",[arg1 class]);
 //  arg1--type=(__NSCFDictionary)
-//NSLog(@"transformResponseData---arg1=(%@)\n",arg1);
+
+//if [arg1 allKeys]  containsObject:@""]）{
+
+NSLog(@"transformResponseData---arg1=(%@)\n",arg1);
+
+//}
+
 
 id r = %orig;
 
@@ -110,8 +155,6 @@ NSLog(@"transformResponseData----0");
 APListData *jdata=[APListData sharedInstance];
 
 jdata.jsBridge=self;
-
-
 
 if(!isExecuteCollect)//是否执行一键收集
 {
@@ -143,58 +186,41 @@ NSLog(@"transformResponseData----2");
 if(jdata.topFriends == nil)
 {
 jdata.topFriends = [[NSMutableArray alloc] init];
+NSLog(@"查询好友排行---初始化jdata.topFriends");
 }
 
-//筛选可收集能量的好友
-for(NSDictionary * dic in friendRanking)
-{
-if([dic[@"canCollectEnergy"] intValue]==1 || [dic[@"canHelpCollect"] intValue]==1 || [dic[@"userId"] isEqualToString:myself_userid])
-{
-BOOL isExist = NO;
-for(NSDictionary * fdic in jdata.topFriends)
-{
-if([fdic[@"userId"] isEqualToString:dic[@"userId"]])
-{
-isExist = YES;
-break;
-}
-}
-if(!isExist)
-{
-// 可收集,添加用户信息到数组
-[jdata.topFriends addObject:dic];
-}
-}
+//存储好友排行信息
+[self saveFriendsInfo:friendRanking];
 
-}
 
-NSLog(@"好友排名个数=（%d）",(int)[jdata.topFriends count]);
+//NSLog(@"好友排名个数=（%d）",(int)[jdata.topFriends count]);
 
 if([dic[@"hasMore"] intValue]==0)
 {
-NSLog(@"transformResponseData----3");
-//没有更多好友信息，执行收集工作
-NSLog(@"已收集全部可收集的好友=%@",jdata.topFriends);
-if(progressView)
-{
-[progressView dismissToast];
-progressView=nil;
-NSLog(@"game---over---查询好友排行榜");
+    NSLog(@"transformResponseData----3");
+    //没有更多好友信息，执行收集工作
+    NSLog(@"已收集全部可收集的好友=%@",jdata.topFriends);
+    if(progressView)
+    {
+        [progressView dismissToast];
+        progressView=nil;
+        NSLog(@"game---over---查询好友排行榜");
 
-}
+    }
 
-//发送通知，goto获取气泡
-[[NSNotificationCenter defaultCenter] postNotificationName:@"goToCollectBublles" object:nil];
+    //发送通知，goto获取气泡
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"goToCollectBublles" object:nil];
+
 }
 else
 {
-NSLog(@"transformResponseData----4");
-//加载更多好友信息
-//获取排行中的用户
-int nextPoint = [dic[@"nextStartPoint"] intValue];
-NSLog(@"加载更多好友信息---%d",nextPoint);
+    NSLog(@"transformResponseData----4");
+    //加载更多好友信息
+    //获取排行中的用户
+    int nextPoint = [dic[@"nextStartPoint"] intValue];
+    NSLog(@"加载更多好友信息---%d",nextPoint);
 
-[H5WebViewController getListRankingWithStartPoint:nextPoint];
+    [H5WebViewController getListRankingWithStartPoint:nextPoint];
 }
 
 NSLog(@"transformResponseData----5");
@@ -211,24 +237,16 @@ NSLog(@"transformResponseData----6");
 if(![userbubbles isKindOfClass:[NSArray class]]||[userbubbles count]<=0)
 return r;
 
+//保存能量气泡
+[self saveBubblesInfo:userbubbles];
 
 NSLog(@"transformResponseData----6.1");
 
-NSLog(@"发现能量了---------%@",userbubbles);
-NSDictionary *dicbulles=[userbubbles objectAtIndex:0];
-NSString *userID=[dicbulles objectForKey:@"userId"];
-//某个用户的能量加入能量数组
-[jdata.topBubblesDic setObject:userbubbles forKey:userID];
-NSLog(@"get--bubbles--%@",userID);
 }
-
 
 NSLog(@"transformResponseData----7");
 
 }
-
-
-
 
 return r;
 
@@ -254,6 +272,7 @@ isFirstDoStartRequest = YES;
 
 - (void)viewDidAppear:(_Bool)arg1
 {
+
 %orig;
 UILabel *showlb=[self webviewDomainLabel];
 
@@ -274,11 +293,13 @@ if(!btView)
 //定时view
 btView = [[MyAutoTimerView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 200, 80, 40)];
 
-btView.startBlock = ^(){[self clickBtn];};
+btView.startBlock = ^(){[self collectEnergy];};
 
 NSLog(@"do--addsubview---MyAutoTimerView");
-[show addSubview:btView];
 }
+
+[show addSubview:btView];
+
 
 
 UIButton *btnWater=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 250, 80, 40)];
@@ -397,9 +418,11 @@ progressView=[%c(AUToast) presentToastWithText:@"查询好友排行榜" logTag:@
 
 }
 
+//手机能量气泡
 %new
 -(void)goToCollectBubbles
 {
+
 
 if(progressView==nil)
 {
@@ -415,10 +438,14 @@ NSLog(@"do--goToCollectBubbles");
 //获取每个用户的气泡
 int count=1;
 
-for(NSDictionary *key in jdata.topFriends)
+/**
+同步查询所有数据.
+*/
+NSArray * finfAlls = [Friend bg_findAll:@"Friend"];
+
+for(Friend *fd in finfAlls)
 {
-NSDictionary *dic2=key;
-NSString *userID=[dic2 objectForKey:@"userId"];
+NSString *userID=[fd userId];
 //获取用户的bubbles
 [H5WebViewController getTopUserBubbles:jdata.jsBridge userId:userID];
 NSLog(@"这是第%d波用户获取能量",count);
@@ -434,10 +461,9 @@ dispatch_async(dispatch_get_global_queue(0, 0), ^{
 [NSThread sleepForTimeInterval:0.5];
 dispatch_async(dispatch_get_main_queue(), ^{
 
-//开始收集全部能量
-[H5WebViewController collectTopBub];
-NSLog(@"game---over--title--正在收取能量--2");
 
+NSLog(@"game---over--title--正在收取能量--2");
+[self collectEnergy];
 
 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 isExecuteCollect = NO;
@@ -455,6 +481,17 @@ NSLog(@"game---over---正在收取能量");
 
 }
 
+//收取能量
+%new
+-(void)collectEnergy {
+
+showMessageWithFrameY(@"正在收取能量", 4, 16,150);
+
+NSLog(@"do--collectEnergy--1");
+//开始收集全部能量
+[H5WebViewController collectTopBub];
+
+}
 
 %end
 

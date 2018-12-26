@@ -100,6 +100,15 @@
     [jsB _doFlushMessageQueue:arg1 url:arg2];
 }
 
+//获取当前时间戳
++(NSString *)currentTimeStr{
+    NSDate* date = [NSDate dateWithTimeIntervalSinceNow:0];//获取当前时间0秒后的时间
+    NSTimeInterval time=[date timeIntervalSince1970]*1000;// *1000 是精确到毫秒，不乘就是精确到秒
+    NSString *timeString = [NSString stringWithFormat:@"%.0f", time];
+    return timeString;
+}
+
+
 
 +(void)collectTopBub
 {
@@ -108,34 +117,51 @@
     NSMutableDictionary *copyDic=[jdata.topBubblesDic mutableCopy];
     
     NSLog(@"收集top10用户OK,开始一个个采集:%@",copyDic);
+    //读取本地保存的能量球
+    NSArray * bubbles = [Bubble bg_findAll:@"Bubble"];
     
-    
-    for (id key in copyDic) {
-        id obj = [copyDic objectForKey:key];
+    for (Bubble * obj in bubbles) {
         
-        NSLog(@"=========:%@=====:%@",key,obj);
-        for(NSDictionary *eachbubble in obj){
-            NSString *collectStatus=[eachbubble objectForKey:@"collectStatus"];
-            int canHelpCollect = [eachbubble[@"canHelpCollect"] intValue];
-            //可收集的 或 可帮助收取的
-            if([collectStatus isEqualToString:@"AVAILABLE"])
-            {
-                NSString *bID=[eachbubble objectForKey:@"id"];
-                NSString *uID=[eachbubble objectForKey:@"userId"];
-                [H5WebViewController collectBubbles:jdata.jsBridge bubbleId:bID userId:uID];
-                NSLog(@"我开始收能量了--:%@",bID);
-                
-            }
-            else if(canHelpCollect==1)
-            {
-
-                NSString *bID=[eachbubble objectForKey:@"id"];
-                NSString *uID=[eachbubble objectForKey:@"userId"];
-                [H5WebViewController helpCollectBubbles:jdata.jsBridge bubbleId:bID userId:uID];
-                NSLog(@"我开始帮他收能量了--:%@",bID);
-
-            }
+        
+        NSLog(@"bubble--userId=(%@);bID=(%@)",obj.userId,obj.bID);
+        
+        NSString *collectStatus=[obj collectStatus];
+        int canHelpCollect = (int)[obj canHelpCollect];
+        
+        
+        //可收集的 或 可帮助收取的
+        if([collectStatus isEqualToString:@"AVAILABLE"] || ([obj produceTime] >= [[H5WebViewController currentTimeStr] longLongValue]))
+        {
+            NSString *bID=[obj bID];
+            NSString *uID=[obj userId];
+            [H5WebViewController collectBubbles:jdata.jsBridge bubbleId:bID userId:uID];
+            NSLog(@"我开始收能量了--:%@",bID);
+            //从数据库删除当前能量气泡
+            /**
+             按条件删除.
+             */
+            NSString* where = [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"bID"),bg_sqlValue(bID)];
+            NSLog(@"AVAILABLE--删除--bubble--（%@）",bID);
+            [Bubble bg_delete:@"Bubble" where:where];
+            
         }
+        else if(canHelpCollect==1)
+        {
+            
+            NSString *bID=[obj bID];
+            NSString *uID=[obj userId];
+            [H5WebViewController helpCollectBubbles:jdata.jsBridge bubbleId:bID userId:uID];
+            NSLog(@"我开始帮他收能量了--:%@",bID);
+            //从数据库删除当前能量气泡
+            /**
+             按条件删除.
+             */
+            NSString* where = [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"bID"),bg_sqlValue(bID)];
+            NSLog(@"canHelpCollect--删除--bubble--（%@）",bID);
+            [Bubble bg_delete:@"Bubble" where:where];
+
+        }
+        
     }
 }
 

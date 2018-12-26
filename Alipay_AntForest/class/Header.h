@@ -71,6 +71,56 @@ static NSString * handleCurrentFriendUserIdWithStr(NSString * str)
     
 }
 
+//提示信息
+static void showMessageWithFrameY(NSString *message, NSTimeInterval tm, int fontSize,float theY)
+{
+    float screen_width = [UIScreen mainScreen].bounds.size.width;
+    
+    UIWindow * window = [UIApplication sharedApplication].keyWindow;
+    UIView *showview =  [[UIView alloc]init];
+    showview.backgroundColor = [UIColor blackColor];
+    showview.frame = CGRectMake(1, 1, 1, 1);
+    showview.alpha = 0.9f;
+    //showview.layer.cornerRadius = 5.0f;
+    //showview.layer.masksToBounds = YES;
+    [window addSubview:showview];
+    
+    
+    float y_label=10;
+    CGSize LabelSize = [message sizeWithFont:[UIFont systemFontOfSize:fontSize] constrainedToSize:CGSizeMake(MAXFLOAT, 9000)];
+    
+    int i=0;
+    
+    UILabel *label = [[UILabel alloc]init];
+    
+    label.frame = CGRectMake(10, 0, screen_width-2*10, LabelSize.height+10);
+    label.lineBreakMode=UILineBreakModeWordWrap;
+    label.numberOfLines = 0;
+    label.text = message;
+    label.textColor = [UIColor redColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:fontSize];
+    [showview addSubview:label];
+    
+    
+    showview.frame = CGRectMake(0, theY, screen_width, LabelSize.height+14);
+    
+    dispatch_time_t time = dispatch_time ( DISPATCH_TIME_NOW , tm * NSEC_PER_SEC ) ;
+    dispatch_after ( time , dispatch_get_main_queue ( ) , ^ {
+        
+        for(UILabel * tmp in showview.subviews){
+            [tmp removeFromSuperview];
+            //tmp=nil;
+        }
+        [showview removeFromSuperview];
+        
+    }) ;
+    
+    
+}
+
+
 
 @interface DTRpcOperation
 

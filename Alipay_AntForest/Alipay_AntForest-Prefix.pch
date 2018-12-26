@@ -10,5 +10,7 @@
 //浇水好友列表保存路径
 #define WaterFriendListPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES)lastObject] stringByAppendingPathComponent:@"WaterFriendList.txt"]
 
+#define NSLog(FORMAT, ...) NSLog(@"🆘支付宝🆘：[%d]： %@\n", __LINE__,[NSString stringWithFormat:FORMAT, ##__VA_ARGS__]);
+
 
 #endif

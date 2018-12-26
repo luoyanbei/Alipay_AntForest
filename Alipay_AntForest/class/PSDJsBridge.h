@@ -14,7 +14,9 @@
 
 
 - (void)_doFlushMessageQueue:(id)arg1 url:(id)arg2;
-
-
+//存储好友信息
+-(void)saveFriendsInfo:(NSArray *)array;
+//保存能量气泡
+-(void)saveBubblesInfo:(NSArray *)array;
 @end
 
