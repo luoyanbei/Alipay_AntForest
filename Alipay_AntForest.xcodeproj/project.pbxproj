@@ -24,6 +24,10 @@
 		3C4ECCC8214D478D003C61D6 /* NSArray+DLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C4ECCBD214D478D003C61D6 /* NSArray+DLog.h */; };
 		3C4ECCC9214D478D003C61D6 /* NSDictionary+DLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4ECCBE214D478D003C61D6 /* NSDictionary+DLog.m */; };
 		3C4ECCCA214D478D003C61D6 /* NSArray+DLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C4ECCBF214D478D003C61D6 /* NSArray+DLog.m */; };
+		3C6319F521D493B600F85F01 /* OCExpandableButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C6319F321D493B600F85F01 /* OCExpandableButton.h */; };
+		3C6319F621D493B600F85F01 /* OCExpandableButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C6319F421D493B600F85F01 /* OCExpandableButton.m */; };
+		3C6319F821D4962E00F85F01 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6319F721D4962E00F85F01 /* CoreGraphics.framework */; };
+		3C6319FA21D4965200F85F01 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C6319F921D4965200F85F01 /* QuartzCore.framework */; };
 		3C912AD621D3C44B00DD9627 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C912AD521D3C44B00DD9627 /* libsqlite3.tbd */; };
 		3C912AF121D3C4F100DD9627 /* BGDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C912ADA21D3C4F100DD9627 /* BGDB.h */; };
 		3C912AF221D3C4F100DD9627 /* BGDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C912ADB21D3C4F100DD9627 /* BGDB.m */; };
@@ -51,6 +55,8 @@
 		3C912B0C21D3C7AF00DD9627 /* Bubble.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C912B0A21D3C7AF00DD9627 /* Bubble.h */; };
 		3C912B0D21D3C7AF00DD9627 /* Bubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C912B0B21D3C7AF00DD9627 /* Bubble.m */; };
 		3C912B0F21D3CA6F00DD9627 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C912B0E21D3CA6F00DD9627 /* CoreData.framework */; };
+		3CD1F48821D51BE900978E17 /* WaterFriend.h in Headers */ = {isa = PBXBuildFile; fileRef = 3CD1F48621D51BE900978E17 /* WaterFriend.h */; };
+		3CD1F48921D51BE900978E17 /* WaterFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CD1F48721D51BE900978E17 /* WaterFriend.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +82,10 @@
 		3C4ECCBD214D478D003C61D6 /* NSArray+DLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DLog.h"; sourceTree = "<group>"; };
 		3C4ECCBE214D478D003C61D6 /* NSDictionary+DLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+DLog.m"; sourceTree = "<group>"; };
 		3C4ECCBF214D478D003C61D6 /* NSArray+DLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DLog.m"; sourceTree = "<group>"; };
+		3C6319F321D493B600F85F01 /* OCExpandableButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCExpandableButton.h; sourceTree = "<group>"; };
+		3C6319F421D493B600F85F01 /* OCExpandableButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OCExpandableButton.m; sourceTree = "<group>"; };
+		3C6319F721D4962E00F85F01 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3C6319F921D4965200F85F01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3C912AD521D3C44B00DD9627 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		3C912ADA21D3C4F100DD9627 /* BGDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BGDB.h; sourceTree = "<group>"; };
 		3C912ADB21D3C4F100DD9627 /* BGDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGDB.m; sourceTree = "<group>"; };
@@ -104,6 +114,8 @@
 		3C912B0A21D3C7AF00DD9627 /* Bubble.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bubble.h; sourceTree = "<group>"; };
 		3C912B0B21D3C7AF00DD9627 /* Bubble.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bubble.m; sourceTree = "<group>"; };
 		3C912B0E21D3CA6F00DD9627 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3CD1F48621D51BE900978E17 /* WaterFriend.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaterFriend.h; sourceTree = "<group>"; };
+		3CD1F48721D51BE900978E17 /* WaterFriend.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaterFriend.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +123,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C6319FA21D4965200F85F01 /* QuartzCore.framework in Frameworks */,
+				3C6319F821D4962E00F85F01 /* CoreGraphics.framework in Frameworks */,
 				3C912B0F21D3CA6F00DD9627 /* CoreData.framework in Frameworks */,
 				3C912AD621D3C44B00DD9627 /* libsqlite3.tbd in Frameworks */,
 				3C4ECC84214D4126003C61D6 /* UIKit.framework in Frameworks */,
@@ -142,6 +156,8 @@
 		3C4ECC82214D4126003C61D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C6319F921D4965200F85F01 /* QuartzCore.framework */,
+				3C6319F721D4962E00F85F01 /* CoreGraphics.framework */,
 				3C912B0E21D3CA6F00DD9627 /* CoreData.framework */,
 				3C912AD521D3C44B00DD9627 /* libsqlite3.tbd */,
 				3C4ECC83214D4126003C61D6 /* UIKit.framework */,
@@ -230,6 +246,8 @@
 				3C912B0721D3C51700DD9627 /* Friend.m */,
 				3C912B0A21D3C7AF00DD9627 /* Bubble.h */,
 				3C912B0B21D3C7AF00DD9627 /* Bubble.m */,
+				3CD1F48621D51BE900978E17 /* WaterFriend.h */,
+				3CD1F48721D51BE900978E17 /* WaterFriend.m */,
 			);
 			path = class;
 			sourceTree = "<group>";
@@ -245,9 +263,19 @@
 			path = tools;
 			sourceTree = "<group>";
 		};
+		3C6319F221D493B600F85F01 /* OCExpandableButton */ = {
+			isa = PBXGroup;
+			children = (
+				3C6319F321D493B600F85F01 /* OCExpandableButton.h */,
+				3C6319F421D493B600F85F01 /* OCExpandableButton.m */,
+			);
+			path = OCExpandableButton;
+			sourceTree = "<group>";
+		};
 		3C912AD721D3C4F100DD9627 /* thirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				3C6319F221D493B600F85F01 /* OCExpandableButton */,
 				3C912AD821D3C4F100DD9627 /* libs */,
 			);
 			path = thirdParty;
@@ -315,9 +343,11 @@
 				3C912AF321D3C4F100DD9627 /* BGFMDB.h in Headers */,
 				3C912AF121D3C4F100DD9627 /* BGDB.h in Headers */,
 				3C442EB5215F1F5100F526FE /* MyAutoTimerView.h in Headers */,
+				3C6319F521D493B600F85F01 /* OCExpandableButton.h in Headers */,
 				3C912B0421D3C4F100DD9627 /* FMResultSet.h in Headers */,
 				3C4ECCC2214D478D003C61D6 /* Header.h in Headers */,
 				3C912B0821D3C51700DD9627 /* Friend.h in Headers */,
+				3CD1F48821D51BE900978E17 /* WaterFriend.h in Headers */,
 				3C912AFE21D3C4F100DD9627 /* FMDatabaseAdditions.h in Headers */,
 				3C912B0221D3C4F100DD9627 /* FMDatabaseQueue.h in Headers */,
 				3C4ECCC6214D478D003C61D6 /* AUToast.h in Headers */,
@@ -418,11 +448,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C912B0D21D3C7AF00DD9627 /* Bubble.m in Sources */,
+				3C6319F621D493B600F85F01 /* OCExpandableButton.m in Sources */,
 				3C912AFA21D3C4F100DD9627 /* NSObject+BGModel.m in Sources */,
 				3C4ECCC1214D478D003C61D6 /* APListData.m in Sources */,
 				3C912B0121D3C4F100DD9627 /* FMDatabasePool.m in Sources */,
 				3C912B0321D3C4F100DD9627 /* FMDatabaseQueue.m in Sources */,
 				3C4ECCCA214D478D003C61D6 /* NSArray+DLog.m in Sources */,
+				3CD1F48921D51BE900978E17 /* WaterFriend.m in Sources */,
 				3C912AF621D3C4F100DD9627 /* BGTool.m in Sources */,
 				3C912AF821D3C4F100DD9627 /* NSCache+BGCache.m in Sources */,
 				3C912AF221D3C4F100DD9627 /* BGDB.m in Sources */,

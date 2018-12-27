@@ -87,12 +87,19 @@
 
 +(void)getTopUserBubbles:(id)mbrige userId:(NSString*)userID
 {
-    
+    showMessageWithFrameY(@"正在收集气泡", 2, 16,150);
+
     
     long timems=[[NSDate  date] timeIntervalSince1970]*1000;
     NSString *timeStamp = [NSString stringWithFormat:@"%ld", timems];
     NSString *randNum=[H5WebViewController getNumberRandom:16];
-    NSString *arg1=[NSString stringWithFormat:@"[{\"handlerName\":\"remoteLog\",\"data\":{\"seedId\":\"ANTFOREST-PAGE-READY-home\",\"param1\":\"shareBiz=none^type=behavior^currentTimestamp=1510628822616\",\"param2\":\"monitor_type=openPage^remoteType=info\",\"bizType\":\"antForest\"},\"callbackId\":\"remoteLog_15106288226220.36025243042968214\"},{\"handlerName\":\"getSystemInfo\",\"data\":{},\"callbackId\":\"getSystemInfo_15106288226230.7224089596420527\"},{\"handlerName\":\"hideOptionMenu\",\"data\":{},\"callbackId\":\"hideOptionMenu_15106288226230.7351219072006643\"},{\"handlerName\":\"setToolbarMenu\",\"data\":{\"menus\":[],\"override\":true},\"callbackId\":\"setToolbarMenu_15106288226230.6259752095211297\"},{\"handlerName\":\"setGestureBack\",\"data\":{\"val\":true},\"callbackId\":\"setGestureBack_15106288226230.2139696276281029\"},{\"handlerName\":\"remoteLog\",\"data\":{\"seedId\":\"ANTFOREST-H5_PAGE_SET_PAGE_NAME\",\"param1\":\"shareBiz=none^type=behavior^currentTimestamp=%@\",\"param2\":\"monitor_type=clicked^remoteType=info^pageName=home.html\",\"bizType\":\"antForest\"},\"callbackId\":\"remoteLog_15106288226260.2301180271897465\"},{\"handlerName\":\"addNotifyListener\",\"data\":{\"name\":\"NEBULANOTIFY_AFRefresh\"},\"callbackId\":\"addNotifyListener_15106288226260.7617499728221446\"},{\"handlerName\":\"rpc\",\"data\":{\"operationType\":\"alipay.antmember.forest.h5.queryNextAction\",\"requestData\":[{\"userId\":\"%@\",\"av\":\"5\",\"ct\":\"ios\"}],\"disableLimitView\":true},\"callbackId\":\"rpc_15106288226260.%@\"}]",timeStamp,userID,randNum];
+//    NSString *arg1=[NSString stringWithFormat:@"[{\"handlerName\":\"remoteLog\",\"data\":{\"seedId\":\"ANTFOREST-PAGE-READY-home\",\"param1\":\"shareBiz=none^type=behavior^currentTimestamp=1510628822616\",\"param2\":\"monitor_type=openPage^remoteType=info\",\"bizType\":\"antForest\"},\"callbackId\":\"remoteLog_15106288226220.36025243042968214\"},{\"handlerName\":\"getSystemInfo\",\"data\":{},\"callbackId\":\"getSystemInfo_15106288226230.7224089596420527\"},{\"handlerName\":\"hideOptionMenu\",\"data\":{},\"callbackId\":\"hideOptionMenu_15106288226230.7351219072006643\"},{\"handlerName\":\"setToolbarMenu\",\"data\":{\"menus\":[],\"override\":true},\"callbackId\":\"setToolbarMenu_15106288226230.6259752095211297\"},{\"handlerName\":\"setGestureBack\",\"data\":{\"val\":true},\"callbackId\":\"setGestureBack_15106288226230.2139696276281029\"},{\"handlerName\":\"remoteLog\",\"data\":{\"seedId\":\"ANTFOREST-H5_PAGE_SET_PAGE_NAME\",\"param1\":\"shareBiz=none^type=behavior^currentTimestamp=%@\",\"param2\":\"monitor_type=clicked^remoteType=info^pageName=home.html\",\"bizType\":\"antForest\"},\"callbackId\":\"remoteLog_15106288226260.2301180271897465\"},{\"handlerName\":\"addNotifyListener\",\"data\":{\"name\":\"NEBULANOTIFY_AFRefresh\"},\"callbackId\":\"addNotifyListener_15106288226260.7617499728221446\"},{\"handlerName\":\"rpc\",\"data\":{\"operationType\":\"alipay.antmember.forest.h5.queryNextAction\",\"requestData\":[{\"userId\":\"%@\",\"av\":\"5\",\"ct\":\"ios\"}],\"disableLimitView\":true},\"callbackId\":\"rpc_15106288226260.%@\"}]",timeStamp,userID,randNum];
+    
+    
+    NSString *arg1=[NSString stringWithFormat:@"[{\"handlerName\":\"remoteLog\",\"data\":{\"seedId\":\"ANTFOREST-PAGE-READY-home\",\"param1\":\"shareBiz=none^type=behavior^currentTimestamp=%@\",\"param2\":\"monitor_type=openPage^remoteType=info\",\"bizType\":\"antForest\"},\"callbackId\":\"remoteLog_15106288226220.36025243042968214\"},{\"handlerName\":\"getSystemInfo\",\"data\":{},\"callbackId\":\"getSystemInfo_15106288226230.7224089596420527\"},{\"handlerName\":\"hideOptionMenu\",\"data\":{},\"callbackId\":\"hideOptionMenu_15106288226230.7351219072006643\"},{\"handlerName\":\"setToolbarMenu\",\"data\":{\"menus\":[],\"override\":true},\"callbackId\":\"setToolbarMenu_15106288226230.6259752095211297\"},{\"handlerName\":\"setGestureBack\",\"data\":{\"val\":true},\"callbackId\":\"setGestureBack_15106288226230.2139696276281029\"},{\"handlerName\":\"remoteLog\",\"data\":{\"seedId\":\"ANTFOREST-H5_PAGE_SET_PAGE_NAME\",\"param1\":\"shareBiz=none^type=behavior^currentTimestamp=%@\",\"param2\":\"monitor_type=clicked^remoteType=info^pageName=home.html\",\"bizType\":\"antForest\"},\"callbackId\":\"remoteLog_15106288226260.2301180271897465\"},{\"handlerName\":\"addNotifyListener\",\"data\":{\"name\":\"NEBULANOTIFY_AFRefresh\"},\"callbackId\":\"addNotifyListener_15106288226260.7617499728221446\"},{\"handlerName\":\"rpc\",\"data\":{\"operationType\":\"alipay.antmember.forest.h5.queryNextAction\",\"requestData\":[{\"userId\":\"%@\",\"av\":\"5\",\"ct\":\"ios\"}],\"disableLimitView\":true},\"callbackId\":\"rpc_15106288226260.%@\"}]",timeStamp,timeStamp,userID,randNum];
+
+    
+    
     
     NSString *arg2=[NSString stringWithFormat:@"https://60000002.h5app.alipay.com/app/src/home.html?userId=%@",userID];
     PSDJsBridge *jsB=mbrige;
@@ -112,6 +119,8 @@
 
 +(void)collectTopBub
 {
+    
+    
     APListData *jdata=[APListData sharedInstance];
     
     NSMutableDictionary *copyDic=[jdata.topBubblesDic mutableCopy];
@@ -121,21 +130,21 @@
     
     NSLog(@"(%d)个气泡等待采集= %@",(int)[bubbles count],bubbles);
 
-    if([bubbles count]<1)
+    if([bubbles count]<=0)
     {
         int count = 0;
-        showMessageWithFrameY(@"本来已无能量数据", 4, 16,150);
+        showMessageWithFrameY(@"本地数据库已无能量气泡", 4, 16,150);
         NSArray * finfAlls = [Friend bg_findAll:@"Friend"];
         
-        for(Friend *fd in finfAlls)
-        {
-            NSString *userID=[fd userId];
-            //获取用户的bubbles
-            [H5WebViewController getTopUserBubbles:jdata.jsBridge userId:userID];
-            NSLog(@"这是第%d波用户获取能量",count);
-            count++;
-            [NSThread sleepForTimeInterval:0.1];
-        }
+//        for(Friend *fd in finfAlls)
+//        {
+//            NSString *userID=[fd userId];
+//            //获取用户的bubbles
+//            [H5WebViewController getTopUserBubbles:jdata.jsBridge userId:userID];
+//            NSLog(@"这是第%d波用户获取能量",count);
+//            count++;
+//            [NSThread sleepForTimeInterval:0.2];
+//        }
 
     }
     
@@ -150,10 +159,27 @@
         NSString *bID=[obj bID];
         NSString *uID=[obj userId];
         
-        //可收集的 或 可帮助收取的
-        if([collectStatus isEqualToString:@"AVAILABLE"] || ([obj produceTime] >= [[H5WebViewController currentTimeStr] longLongValue]))
+        
+        if(canHelpCollect==1)
         {
-            showMessageWithFrameY(@"正在收取能量", 4, 16,150);
+            showMessageWithFrameY(@"帮好友收取成熟能量", 5, 16,150);
+
+            [H5WebViewController helpCollectBubbles:jdata.jsBridge bubbleId:bID userId:uID];
+            NSLog(@"我开始帮他收能量了--:%@",bID);
+            //从数据库删除当前能量气泡
+            /**
+             按条件删除.
+             */
+            NSString* where = [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"bID"),bg_sqlValue(bID)];
+            NSLog(@"canHelpCollect--删除--bubble--（%@）",bID);
+            [Bubble bg_delete:@"Bubble" where:where];
+            
+        }
+        else
+        //可收集的 或 可帮助收取的
+        if([collectStatus isEqualToString:@"AVAILABLE"] || ([obj produceTime] <= [[H5WebViewController currentTimeStr] longLongValue]))
+        {
+            showMessageWithFrameY(@"正在收取好友能量", 5, 16,150);
 
             [H5WebViewController collectBubbles:jdata.jsBridge bubbleId:bID userId:uID];
             NSLog(@"我开始收能量了--:%@",bID);
@@ -166,20 +192,6 @@
             [Bubble bg_delete:@"Bubble" where:where];
             
         }
-        else if(canHelpCollect==1)
-        {
-            
-            [H5WebViewController helpCollectBubbles:jdata.jsBridge bubbleId:bID userId:uID];
-            NSLog(@"我开始帮他收能量了--:%@",bID);
-            //从数据库删除当前能量气泡
-            /**
-             按条件删除.
-             */
-            NSString* where = [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"bID"),bg_sqlValue(bID)];
-            NSLog(@"canHelpCollect--删除--bubble--（%@）",bID);
-            [Bubble bg_delete:@"Bubble" where:where];
-
-        }
         else
         {
             if([obj produceTime] - [[H5WebViewController currentTimeStr] longLongValue]<0)
@@ -188,7 +200,12 @@
                 NSLog(@"canHelpCollect--删除过期--bubble--（%@）",bID);
                 [Bubble bg_delete:@"Bubble" where:where];
             }
-            NSLog(@"不可收取(ID=%@);(%lld)-(%lld)=(%lld)",obj.bID,[obj produceTime],[[H5WebViewController currentTimeStr] longLongValue],[obj produceTime] - [[H5WebViewController currentTimeStr] longLongValue]);
+            else
+            {
+                showMessageWithFrameY(@"能量未成熟，继续等待", 5, 16,150);
+
+            NSLog(@"不可收取,等待,(ID=%@);(%lld)-(%lld)=(%lld)",obj.bID,[obj produceTime],[[H5WebViewController currentTimeStr] longLongValue],[obj produceTime] - [[H5WebViewController currentTimeStr] longLongValue]);
+            }
         }
         
     }

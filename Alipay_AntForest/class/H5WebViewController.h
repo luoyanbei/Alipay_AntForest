@@ -39,5 +39,13 @@
 +(void)waterTreeWithUserId:(NSString*)userID;
 
 -(void)collectEnergy;
+-(void)initIcon;
+-(void)menuBtnClick:(UIButton *)btn;
+-(void)goToCollectBubbles;
+
+-(void)btnClearWaterList;
+-(void)btnAddWaterClick;
+-(void)bluewaterBtnClick;
+
 @end
 

@@ -22,4 +22,6 @@ typedef void (^startBtnClickBlock)();
 
 -(instancetype)initWithFrame:(CGRect)frame;
 
+-(void)startBtnClick:(UIButton *)btn;
+
 @end

@@ -1,4 +1,4 @@
-#line 1 "/Users/king/Documents/GitHub/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"
+#line 1 "/Volumes/WangJun/文件/0工作/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"
 
 
 #if TARGET_OS_SIMULATOR
@@ -16,12 +16,15 @@
 #import "AUToast.h"
 #import "Header.h"
 #import "MyAutoTimerView.h"
+#import "OCExpandableButton.h"
 
 #import "Friend.h"
 #import "Bubble.h"
-
 #import <substrate.h>
 #import <sys/sysctl.h>
+
+
+
 
 
 static int (*orig_ptrace) (int request, pid_t pid, caddr_t addr, int data);
@@ -42,6 +45,9 @@ return orig_ptrace(request,pid,addr,data);
 @class DTRpcConfigManager,DTRpcMethod;
 
 
+OCExpandableButton * imgIcon;
+
+
 BOOL isFirstDoStartRequest=YES;
 
 BOOL isGainAllUserInfo = NO;
@@ -57,10 +63,10 @@ MyAutoTimerView * btView=nil;
 
 NSString * currentFriendUserID = nil;
 
+NSMutableArray *menuSubviews;
 
 
-
-static __attribute__((constructor)) void _logosLocalCtor_8b131269(int __unused argc, char __unused **argv, char __unused **envp){
+static __attribute__((constructor)) void _logosLocalCtor_37229219(int __unused argc, char __unused **argv, char __unused **envp){
 MSHookFunction((void *)MSFindSymbol(NULL,"_ptrace"),(void*)my_ptrace,(void**)&orig_ptrace);
 NSLog(@"[AntiAntiDebug] Module loaded!!!");
 
@@ -103,9 +109,9 @@ NSLog(@"documens路径:%@", documentPath);
 #endif
 
 @class H5WebViewController; @class AUToast; @class PSDJsBridge; 
-static void (*_logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$)(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id, id); static void _logos_method$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id, id); static void _logos_method$_ungrouped$PSDJsBridge$saveFriendsInfo$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, NSArray *); static void _logos_method$_ungrouped$PSDJsBridge$saveBubblesInfo$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, NSArray *); static id (*_logos_orig$_ungrouped$PSDJsBridge$transformResponseData$)(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id); static id _logos_method$_ungrouped$PSDJsBridge$transformResponseData$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id); static void (*_logos_orig$_ungrouped$H5WebViewController$viewDidLoad)(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$viewDidLoad(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void (*_logos_orig$_ungrouped$H5WebViewController$viewDidAppear$)(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, _Bool); static void _logos_method$_ungrouped$H5WebViewController$viewDidAppear$(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, _Bool); static void _logos_method$_ungrouped$H5WebViewController$btnAddWaterClick(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$bluewaterBtnClick(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$clickBtn(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$goToCollectBubbles(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$collectEnergy(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); 
+static void (*_logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$)(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id, id); static void _logos_method$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id, id); static void _logos_method$_ungrouped$PSDJsBridge$saveFriendsInfo$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, NSArray *); static void _logos_method$_ungrouped$PSDJsBridge$saveBubblesInfo$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, NSArray *); static id (*_logos_orig$_ungrouped$PSDJsBridge$transformResponseData$)(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id); static id _logos_method$_ungrouped$PSDJsBridge$transformResponseData$(_LOGOS_SELF_TYPE_NORMAL PSDJsBridge* _LOGOS_SELF_CONST, SEL, id); static void (*_logos_orig$_ungrouped$H5WebViewController$viewDidLoad)(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$viewDidLoad(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$initIcon(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$menuBtnClick$(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, UIButton *); static void (*_logos_orig$_ungrouped$H5WebViewController$viewDidAppear$)(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, _Bool); static void _logos_method$_ungrouped$H5WebViewController$viewDidAppear$(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL, _Bool); static void _logos_method$_ungrouped$H5WebViewController$btnAddWaterClick(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$btnClearWaterList(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$bluewaterBtnClick(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$clickBtn(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$goToCollectBubbles(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); static void _logos_method$_ungrouped$H5WebViewController$collectEnergy(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST, SEL); 
 static __inline__ __attribute__((always_inline)) __attribute__((unused)) Class _logos_static_class_lookup$AUToast(void) { static Class _klass; if(!_klass) { _klass = objc_getClass("AUToast"); } return _klass; }
-#line 83 "/Users/king/Documents/GitHub/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"
+#line 89 "/Volumes/WangJun/文件/0工作/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"
 
 
 
@@ -149,8 +155,17 @@ static void _logos_method$_ungrouped$PSDJsBridge$saveBubblesInfo$(_LOGOS_SELF_TY
     for(int i=0; i< [array count]; i++)
     {
         Bubble * b = [Bubble creatWithDic:array[i]];
+
+        NSString *collectStatus=[b collectStatus];
+        int canHelpCollect = (int)[b canHelpCollect];
+        if(canHelpCollect==1 || (![collectStatus isEqualToString:@"INSUFFICIENT"] && ![collectStatus isEqualToString:@"ROBBED"]))
         [b bg_saveOrUpdate];
     }
+
+    NSArray * bubbles = [Bubble bg_findAll:@"Bubble"];
+
+    if(bubbles)
+        showMessageWithFrameY([NSString stringWithFormat:@"收集了[ %d ]个气泡",(int)[bubbles count]], 4, 16,150);
 }
 
 
@@ -184,7 +199,7 @@ jdata.jsBridge=self;
 
 if(!isExecuteCollect)
 {
-return r;
+
 }
 
 
@@ -258,7 +273,7 @@ id userbubbles=[dic objectForKey:@"bubbles"];
 
 if(userbubbles)
 {
-NSLog(@"transformResponseData----6");
+NSLog(@"transformResponseData----6--用户气泡=(%@)",userbubbles);
 
 if(![userbubbles isKindOfClass:[NSArray class]]||[userbubbles count]<=0)
 return r;
@@ -267,6 +282,16 @@ return r;
 [self saveBubblesInfo:userbubbles];
 
 NSLog(@"transformResponseData----6.1");
+
+}
+
+
+if([dic objectForKey:@"userEnergy"])
+{
+NSDictionary * user = [dic objectForKey:@"userEnergy"];
+NSDictionary * myDic = @{@"userId":user[@"userId"],@"canCollectLaterTime":@"1",@"canCollectEnergy":@"1",@"canHelpCollect":@"1",@"collectableBubbleCount":@"2",@"displayName":user[@"displayName"]};
+[self saveFriendsInfo:@[myDic]];
+NSLog(@"保存我自己的id");
 
 }
 
@@ -297,6 +322,82 @@ isFirstDoStartRequest = YES;
 }
 
 
+
+static void _logos_method$_ungrouped$H5WebViewController$initIcon(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+if(imgIcon==nil){
+NSLog(@"initIcon---1");
+
+NSMutableArray *subviews = [[NSMutableArray alloc] init];
+
+NSArray * titles = @[@"收集好友",@"收集气泡",@"定时收取",@"加入浇水",@"清空浇水",@"执行浇水"];
+NSLog(@"initIcon---2");
+
+float btnWidth = 60.0;
+float btnHeight = 40.0;
+
+for(int i = 0; i < (int)[titles count]; i++)
+{
+UIButton *numberButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, btnWidth, btnHeight)];
+numberButton.tag = i;
+numberButton.backgroundColor = [UIColor clearColor];
+[numberButton setTitle:[NSString stringWithFormat:@"%@", titles[i]] forState:UIControlStateNormal];
+numberButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+[numberButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+[numberButton addTarget:self action:@selector(menuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+[numberButton.titleLabel setFont:[UIFont systemFontOfSize:12.0]];
+
+[subviews addObject:numberButton];
+}
+
+menuSubviews = subviews;
+
+imgIcon = [[OCExpandableButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 10-btnWidth, 66, btnWidth, btnWidth) subviews:subviews];
+
+imgIcon.alignment = OCExpandableButtonAlignmentLeft;
+NSLog(@"initIcon---4");
+
+[[self view] addSubview:imgIcon];
+
+}
+
+UIWebView *show=[self h5WebView];
+
+[show addSubview:imgIcon];
+
+}
+
+
+
+static void _logos_method$_ungrouped$H5WebViewController$menuBtnClick$(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, UIButton * btn) {
+    switch (btn.tag) {
+        case 0:
+            [self clickBtn];
+            break;
+        case 1:
+            [self goToCollectBubbles];
+            break;
+        case 2: {
+            [btView startBtnClick:menuSubviews[2]];
+            break;
+        }
+
+        case 3:
+            [self btnAddWaterClick];
+            break;
+        case 4:
+            [self btnClearWaterList];
+            break;
+        case 5:
+            [self bluewaterBtnClick];
+            break;
+        default:
+            break;
+    }
+
+}
+
+
+
 static void _logos_method$_ungrouped$H5WebViewController$viewDidAppear$(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd, _Bool arg1) {
 
 _logos_orig$_ungrouped$H5WebViewController$viewDidAppear$(self, _cmd, arg1);
@@ -304,6 +405,22 @@ UILabel *showlb=[self webviewDomainLabel];
 
 if ([showlb.text rangeOfString:@"60000002.h5app.alipay.com"].location != NSNotFound)
 {
+
+[self initIcon];
+
+if(!btView)
+{
+
+btView = [[MyAutoTimerView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 200, 80, 40)];
+
+btView.startBlock = ^(){[self collectEnergy];};
+
+NSLog(@"do--addsubview---MyAutoTimerView");
+}
+
+
+return;
+
 UIButton *btnAdd=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 150, 80, 40)];
 [btnAdd setTitle:@"一键收取" forState:UIControlStateNormal];
 btnAdd.titleLabel.font = [UIFont systemFontOfSize: 15.0];
@@ -366,6 +483,7 @@ static void _logos_method$_ungrouped$H5WebViewController$btnAddWaterClick(_LOGOS
     {
         NSLog(@"btnAddWaterClick---2");
 
+
         BOOL result = saveWaterFriendListToFile(currentFriendUserID);
         NSString * message = result?@"添加成功":@"添加失败";
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -375,6 +493,16 @@ static void _logos_method$_ungrouped$H5WebViewController$btnAddWaterClick(_LOGOS
     NSLog(@"btnAddWaterClick---3");
 
 }
+
+
+static void _logos_method$_ungrouped$H5WebViewController$btnClearWaterList(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
+
+BOOL result = clearWaterFriendList();
+NSString * message = result?@"清空成功":@"清空失败";
+UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+[alert show];
+}
+
 
 
 
@@ -438,9 +566,8 @@ progressView=[_logos_static_class_lookup$AUToast() presentToastWithText:@"查询
 
 
 
-[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToCollectBubbles) name:@"goToCollectBublles" object:nil];
 
-[NSThread sleepForTimeInterval:0.1];
+
 
 }
 
@@ -448,14 +575,6 @@ progressView=[_logos_static_class_lookup$AUToast() presentToastWithText:@"查询
 
 
 static void _logos_method$_ungrouped$H5WebViewController$goToCollectBubbles(_LOGOS_SELF_TYPE_NORMAL H5WebViewController* _LOGOS_SELF_CONST __unused self, SEL __unused _cmd) {
-
-
-if(progressView==nil)
-{
-progressView=[_logos_static_class_lookup$AUToast() presentToastWithText:@"正在收取能量" logTag:@"1"];
-NSLog(@"game---over--title--正在收取能量");
-
-}
 
 
 APListData *jdata=[APListData sharedInstance];
@@ -469,6 +588,7 @@ int count=1;
 
 NSArray * finfAlls = [Friend bg_findAll:@"Friend"];
 
+
 for(Friend *fd in finfAlls)
 {
 NSString *userID=[fd userId];
@@ -476,10 +596,11 @@ NSString *userID=[fd userId];
 [H5WebViewController getTopUserBubbles:jdata.jsBridge userId:userID];
 NSLog(@"这是第%d波用户获取能量",count);
 count++;
-[NSThread sleepForTimeInterval:0.1];
+[NSThread sleepForTimeInterval:0.2];
 }
 
 
+return;
 
 
 dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -523,5 +644,5 @@ NSLog(@"do--collectEnergy--1");
 
 
 static __attribute__((constructor)) void _logosLocalInit() {
-{Class _logos_class$_ungrouped$PSDJsBridge = objc_getClass("PSDJsBridge"); MSHookMessageEx(_logos_class$_ungrouped$PSDJsBridge, @selector(_doFlushMessageQueue:url:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$, (IMP*)&_logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSArray *), strlen(@encode(NSArray *))); i += strlen(@encode(NSArray *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$PSDJsBridge, @selector(saveFriendsInfo:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$saveFriendsInfo$, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSArray *), strlen(@encode(NSArray *))); i += strlen(@encode(NSArray *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$PSDJsBridge, @selector(saveBubblesInfo:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$saveBubblesInfo$, _typeEncoding); }MSHookMessageEx(_logos_class$_ungrouped$PSDJsBridge, @selector(transformResponseData:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$transformResponseData$, (IMP*)&_logos_orig$_ungrouped$PSDJsBridge$transformResponseData$);Class _logos_class$_ungrouped$H5WebViewController = objc_getClass("H5WebViewController"); MSHookMessageEx(_logos_class$_ungrouped$H5WebViewController, @selector(viewDidLoad), (IMP)&_logos_method$_ungrouped$H5WebViewController$viewDidLoad, (IMP*)&_logos_orig$_ungrouped$H5WebViewController$viewDidLoad);MSHookMessageEx(_logos_class$_ungrouped$H5WebViewController, @selector(viewDidAppear:), (IMP)&_logos_method$_ungrouped$H5WebViewController$viewDidAppear$, (IMP*)&_logos_orig$_ungrouped$H5WebViewController$viewDidAppear$);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(btnAddWaterClick), (IMP)&_logos_method$_ungrouped$H5WebViewController$btnAddWaterClick, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(bluewaterBtnClick), (IMP)&_logos_method$_ungrouped$H5WebViewController$bluewaterBtnClick, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(clickBtn), (IMP)&_logos_method$_ungrouped$H5WebViewController$clickBtn, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(goToCollectBubbles), (IMP)&_logos_method$_ungrouped$H5WebViewController$goToCollectBubbles, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(collectEnergy), (IMP)&_logos_method$_ungrouped$H5WebViewController$collectEnergy, _typeEncoding); }} }
-#line 499 "/Users/king/Documents/GitHub/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"
+{Class _logos_class$_ungrouped$PSDJsBridge = objc_getClass("PSDJsBridge"); MSHookMessageEx(_logos_class$_ungrouped$PSDJsBridge, @selector(_doFlushMessageQueue:url:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$, (IMP*)&_logos_orig$_ungrouped$PSDJsBridge$_doFlushMessageQueue$url$);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSArray *), strlen(@encode(NSArray *))); i += strlen(@encode(NSArray *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$PSDJsBridge, @selector(saveFriendsInfo:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$saveFriendsInfo$, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSArray *), strlen(@encode(NSArray *))); i += strlen(@encode(NSArray *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$PSDJsBridge, @selector(saveBubblesInfo:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$saveBubblesInfo$, _typeEncoding); }MSHookMessageEx(_logos_class$_ungrouped$PSDJsBridge, @selector(transformResponseData:), (IMP)&_logos_method$_ungrouped$PSDJsBridge$transformResponseData$, (IMP*)&_logos_orig$_ungrouped$PSDJsBridge$transformResponseData$);Class _logos_class$_ungrouped$H5WebViewController = objc_getClass("H5WebViewController"); MSHookMessageEx(_logos_class$_ungrouped$H5WebViewController, @selector(viewDidLoad), (IMP)&_logos_method$_ungrouped$H5WebViewController$viewDidLoad, (IMP*)&_logos_orig$_ungrouped$H5WebViewController$viewDidLoad);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(initIcon), (IMP)&_logos_method$_ungrouped$H5WebViewController$initIcon, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(UIButton *), strlen(@encode(UIButton *))); i += strlen(@encode(UIButton *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(menuBtnClick:), (IMP)&_logos_method$_ungrouped$H5WebViewController$menuBtnClick$, _typeEncoding); }MSHookMessageEx(_logos_class$_ungrouped$H5WebViewController, @selector(viewDidAppear:), (IMP)&_logos_method$_ungrouped$H5WebViewController$viewDidAppear$, (IMP*)&_logos_orig$_ungrouped$H5WebViewController$viewDidAppear$);{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(btnAddWaterClick), (IMP)&_logos_method$_ungrouped$H5WebViewController$btnAddWaterClick, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(btnClearWaterList), (IMP)&_logos_method$_ungrouped$H5WebViewController$btnClearWaterList, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(bluewaterBtnClick), (IMP)&_logos_method$_ungrouped$H5WebViewController$bluewaterBtnClick, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(clickBtn), (IMP)&_logos_method$_ungrouped$H5WebViewController$clickBtn, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(goToCollectBubbles), (IMP)&_logos_method$_ungrouped$H5WebViewController$goToCollectBubbles, _typeEncoding); }{ char _typeEncoding[1024]; unsigned int i = 0; _typeEncoding[i] = 'v'; i += 1; _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; _typeEncoding[i] = '\0'; class_addMethod(_logos_class$_ungrouped$H5WebViewController, @selector(collectEnergy), (IMP)&_logos_method$_ungrouped$H5WebViewController$collectEnergy, _typeEncoding); }} }
+#line 620 "/Volumes/WangJun/文件/0工作/Alipay_AntForest/Alipay_AntForest/Alipay_AntForest.xm"

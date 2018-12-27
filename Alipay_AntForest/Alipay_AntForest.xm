@@ -15,12 +15,15 @@
 #import "AUToast.h"
 #import "Header.h"
 #import "MyAutoTimerView.h"
+#import "OCExpandableButton.h"
 
 #import "Friend.h"
 #import "Bubble.h"
-
 #import <substrate.h>
 #import <sys/sysctl.h>
+
+
+
 
 
 static int (*orig_ptrace) (int request, pid_t pid, caddr_t addr, int data);
@@ -40,6 +43,9 @@ return orig_ptrace(request,pid,addr,data);
 #define CDUnknownBlockType id
 @class DTRpcConfigManager,DTRpcMethod;
 
+//悬浮按钮
+OCExpandableButton * imgIcon;
+
 //全局变量
 BOOL isFirstDoStartRequest=YES;
 //已获取全部用户信息
@@ -56,7 +62,7 @@ MyAutoTimerView * btView=nil;
 //当前好友的userid
 NSString * currentFriendUserID = nil;
 
-
+NSMutableArray *menuSubviews;
 
 
 %ctor{
@@ -123,8 +129,17 @@ NSLog(@"currentFriendUserID---receive---1--currentFriendUserID=(%@)",currentFrie
     for(int i=0; i< [array count]; i++)
     {
         Bubble * b = [Bubble creatWithDic:array[i]];
+
+        NSString *collectStatus=[b collectStatus];
+        int canHelpCollect = (int)[b canHelpCollect];
+        if(canHelpCollect==1 || (![collectStatus isEqualToString:@"INSUFFICIENT"] && ![collectStatus isEqualToString:@"ROBBED"]))
         [b bg_saveOrUpdate];
     }
+
+    NSArray * bubbles = [Bubble bg_findAll:@"Bubble"];
+
+    if(bubbles)
+        showMessageWithFrameY([NSString stringWithFormat:@"收集了[ %d ]个气泡",(int)[bubbles count]], 4, 16,150);
 }
 
 
@@ -158,7 +173,7 @@ jdata.jsBridge=self;
 
 if(!isExecuteCollect)//是否执行一键收集
 {
-return r;//
+//return r;//
 }
 
 
@@ -232,7 +247,7 @@ id userbubbles=[dic objectForKey:@"bubbles"];
 
 if(userbubbles)
 {
-NSLog(@"transformResponseData----6");
+NSLog(@"transformResponseData----6--用户气泡=(%@)",userbubbles);
 
 if(![userbubbles isKindOfClass:[NSArray class]]||[userbubbles count]<=0)
 return r;
@@ -241,6 +256,16 @@ return r;
 [self saveBubblesInfo:userbubbles];
 
 NSLog(@"transformResponseData----6.1");
+
+}
+
+//保存我自己的id
+if([dic objectForKey:@"userEnergy"])
+{
+NSDictionary * user = [dic objectForKey:@"userEnergy"];
+NSDictionary * myDic = @{@"userId":user[@"userId"],@"canCollectLaterTime":@"1",@"canCollectEnergy":@"1",@"canHelpCollect":@"1",@"collectableBubbleCount":@"2",@"displayName":user[@"displayName"]};
+[self saveFriendsInfo:@[myDic]];
+NSLog(@"保存我自己的id");
 
 }
 
@@ -270,6 +295,82 @@ isFirstDoStartRequest = YES;
 
 }
 
+//初始化图标
+%new
+-(void)initIcon {
+if(imgIcon==nil){
+NSLog(@"initIcon---1");
+
+NSMutableArray *subviews = [[NSMutableArray alloc] init];
+
+NSArray * titles = @[@"收集好友",@"收集气泡",@"定时收取",@"加入浇水",@"清空浇水",@"执行浇水"];
+NSLog(@"initIcon---2");
+
+float btnWidth = 60.0;
+float btnHeight = 40.0;
+
+for(int i = 0; i < (int)[titles count]; i++)
+{
+UIButton *numberButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, btnWidth, btnHeight)];
+numberButton.tag = i;
+numberButton.backgroundColor = [UIColor clearColor];
+[numberButton setTitle:[NSString stringWithFormat:@"%@", titles[i]] forState:UIControlStateNormal];
+numberButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+[numberButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+[numberButton addTarget:self action:@selector(menuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+[numberButton.titleLabel setFont:[UIFont systemFontOfSize:12.0]];
+
+[subviews addObject:numberButton];
+}
+
+menuSubviews = subviews;
+
+imgIcon = [[OCExpandableButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH - 10-btnWidth, 66, btnWidth, btnWidth) subviews:subviews];
+
+imgIcon.alignment = OCExpandableButtonAlignmentLeft;
+NSLog(@"initIcon---4");
+
+[[self view] addSubview:imgIcon];
+
+}
+
+UIWebView *show=[self h5WebView];
+
+[show addSubview:imgIcon];
+
+}
+
+%new
+//菜单点击事件
+-(void)menuBtnClick:(UIButton *)btn {
+    switch (btn.tag) {
+        case 0:
+            [self clickBtn];
+            break;
+        case 1:
+            [self goToCollectBubbles];
+            break;
+        case 2: {
+            [btView startBtnClick:menuSubviews[2]];
+            break;
+        }
+
+        case 3:
+            [self btnAddWaterClick];//当前用户加入浇水队列
+            break;
+        case 4:
+            [self btnClearWaterList];
+            break;
+        case 5:
+            [self bluewaterBtnClick];
+            break;
+        default:
+            break;
+    }
+
+}
+
+
 - (void)viewDidAppear:(_Bool)arg1
 {
 
@@ -278,6 +379,22 @@ UILabel *showlb=[self webviewDomainLabel];
 
 if ([showlb.text rangeOfString:@"60000002.h5app.alipay.com"].location != NSNotFound)
 {
+
+[self initIcon];
+
+if(!btView)
+{
+//定时view
+btView = [[MyAutoTimerView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 200, 80, 40)];
+
+btView.startBlock = ^(){[self collectEnergy];};
+
+NSLog(@"do--addsubview---MyAutoTimerView");
+}
+
+
+return;
+
 UIButton *btnAdd=[[UIButton alloc]initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width-80, 150, 80, 40)];
 [btnAdd setTitle:@"一键收取" forState:UIControlStateNormal];
 btnAdd.titleLabel.font = [UIFont systemFontOfSize: 15.0];
@@ -340,6 +457,7 @@ return;
     {
         NSLog(@"btnAddWaterClick---2");
 
+
         BOOL result = saveWaterFriendListToFile(currentFriendUserID);
         NSString * message = result?@"添加成功":@"添加失败";
         UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
@@ -349,6 +467,16 @@ return;
     NSLog(@"btnAddWaterClick---3");
 
 }
+
+%new
+-(void)btnClearWaterList {
+
+BOOL result = clearWaterFriendList();
+NSString * message = result?@"清空成功":@"清空失败";
+UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"" message:message delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+[alert show];
+}
+
 //执行一键浇水
 %new
 -(void)bluewaterBtnClick
@@ -412,9 +540,8 @@ progressView=[%c(AUToast) presentToastWithText:@"查询好友排行榜" logTag:@
 
 
 //注册一个通知
-[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToCollectBubbles) name:@"goToCollectBublles" object:nil];
-
-[NSThread sleepForTimeInterval:0.1];
+//[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToCollectBubbles) name:@"goToCollectBublles" object:nil];
+//[NSThread sleepForTimeInterval:0.1];
 
 }
 
@@ -422,14 +549,6 @@ progressView=[%c(AUToast) presentToastWithText:@"查询好友排行榜" logTag:@
 %new
 -(void)goToCollectBubbles
 {
-
-
-if(progressView==nil)
-{
-progressView=[%c(AUToast) presentToastWithText:@"正在收取能量" logTag:@"1"];
-NSLog(@"game---over--title--正在收取能量");
-
-}
 
 
 APListData *jdata=[APListData sharedInstance];
@@ -443,6 +562,7 @@ int count=1;
 */
 NSArray * finfAlls = [Friend bg_findAll:@"Friend"];
 
+
 for(Friend *fd in finfAlls)
 {
 NSString *userID=[fd userId];
@@ -450,10 +570,11 @@ NSString *userID=[fd userId];
 [H5WebViewController getTopUserBubbles:jdata.jsBridge userId:userID];
 NSLog(@"这是第%d波用户获取能量",count);
 count++;
-[NSThread sleepForTimeInterval:0.1];
+[NSThread sleepForTimeInterval:0.2];
 }
 
 
+return;
 
 //等最后一波的回调结果
 dispatch_async(dispatch_get_global_queue(0, 0), ^{
