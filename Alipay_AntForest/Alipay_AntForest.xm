@@ -418,7 +418,7 @@ progressView=[%c(AUToast) presentToastWithText:@"查询好友排行榜" logTag:@
 
 }
 
-//手机能量气泡
+//收集能量气泡
 %new
 -(void)goToCollectBubbles
 {
@@ -484,7 +484,6 @@ NSLog(@"game---over---正在收取能量");
 //收取能量
 %new
 -(void)collectEnergy {
-
 
 NSLog(@"do--collectEnergy--1");
 //开始收集全部能量

@@ -123,7 +123,20 @@
 
     if([bubbles count]<1)
     {
+        int count = 0;
         showMessageWithFrameY(@"本来已无能量数据", 4, 16,150);
+        NSArray * finfAlls = [Friend bg_findAll:@"Friend"];
+        
+        for(Friend *fd in finfAlls)
+        {
+            NSString *userID=[fd userId];
+            //获取用户的bubbles
+            [H5WebViewController getTopUserBubbles:jdata.jsBridge userId:userID];
+            NSLog(@"这是第%d波用户获取能量",count);
+            count++;
+            [NSThread sleepForTimeInterval:0.1];
+        }
+
     }
     
     for (Bubble * obj in bubbles) {
