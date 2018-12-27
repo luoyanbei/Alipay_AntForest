@@ -1,6 +1,6 @@
 
 #import "H5WebViewController.h"
-
+#import "Header.h"
 
 @class NBLoadRequestEvent;
 
@@ -116,12 +116,17 @@
     
     NSMutableDictionary *copyDic=[jdata.topBubblesDic mutableCopy];
     
-    NSLog(@"收集top10用户OK,开始一个个采集:%@",copyDic);
     //读取本地保存的能量球
     NSArray * bubbles = [Bubble bg_findAll:@"Bubble"];
     
+    NSLog(@"(%d)个气泡等待采集= %@",(int)[bubbles count],bubbles);
+
+    if([bubbles count]<1)
+    {
+        showMessageWithFrameY(@"本来已无能量数据", 4, 16,150);
+    }
+    
     for (Bubble * obj in bubbles) {
-        
         
         NSLog(@"bubble--userId=(%@);bID=(%@)",obj.userId,obj.bID);
         
@@ -129,11 +134,14 @@
         int canHelpCollect = (int)[obj canHelpCollect];
         
         
+        NSString *bID=[obj bID];
+        NSString *uID=[obj userId];
+        
         //可收集的 或 可帮助收取的
         if([collectStatus isEqualToString:@"AVAILABLE"] || ([obj produceTime] >= [[H5WebViewController currentTimeStr] longLongValue]))
         {
-            NSString *bID=[obj bID];
-            NSString *uID=[obj userId];
+            showMessageWithFrameY(@"正在收取能量", 4, 16,150);
+
             [H5WebViewController collectBubbles:jdata.jsBridge bubbleId:bID userId:uID];
             NSLog(@"我开始收能量了--:%@",bID);
             //从数据库删除当前能量气泡
@@ -148,8 +156,6 @@
         else if(canHelpCollect==1)
         {
             
-            NSString *bID=[obj bID];
-            NSString *uID=[obj userId];
             [H5WebViewController helpCollectBubbles:jdata.jsBridge bubbleId:bID userId:uID];
             NSLog(@"我开始帮他收能量了--:%@",bID);
             //从数据库删除当前能量气泡
@@ -160,6 +166,16 @@
             NSLog(@"canHelpCollect--删除--bubble--（%@）",bID);
             [Bubble bg_delete:@"Bubble" where:where];
 
+        }
+        else
+        {
+            if([obj produceTime] - [[H5WebViewController currentTimeStr] longLongValue]<0)
+            {
+                NSString* where = [NSString stringWithFormat:@"where %@=%@",bg_sqlKey(@"bID"),bg_sqlValue(bID)];
+                NSLog(@"canHelpCollect--删除过期--bubble--（%@）",bID);
+                [Bubble bg_delete:@"Bubble" where:where];
+            }
+            NSLog(@"不可收取(ID=%@);(%lld)-(%lld)=(%lld)",obj.bID,[obj produceTime],[[H5WebViewController currentTimeStr] longLongValue],[obj produceTime] - [[H5WebViewController currentTimeStr] longLongValue]);
         }
         
     }

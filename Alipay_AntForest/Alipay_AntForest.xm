@@ -485,7 +485,6 @@ NSLog(@"game---over---正在收取能量");
 %new
 -(void)collectEnergy {
 
-showMessageWithFrameY(@"正在收取能量", 4, 16,150);
 
 NSLog(@"do--collectEnergy--1");
 //开始收集全部能量
