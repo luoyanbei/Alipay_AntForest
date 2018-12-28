@@ -69,7 +69,7 @@ bubbles : [
 2018-12-27更新，优化了能量收取逻辑。使用数据库保存好友排名和能量气泡，每10秒执行一次收取，数据库中的能量气泡的produceTime字段与当前时间戳比较。
 
 2018-12-28更新，跟新界面UI，更新功能逻辑，提高收取能量成功率。
-<div align=center><img width="300" height="400" src="./images/10timer@2x.png"/></div>
+<div align=center><img width="300" height="400" src="./images/10timer2@2x.png"/></div>
 
 <div align=center><img width="300" height="400" src="./images/record@2x.png"/></div>
 
