@@ -22,6 +22,8 @@
     Friend * friend = [[Friend alloc] init];
     
     friend.userId = [NSString stringWithFormat:@"%@",dic[@"userId"]];
+    friend.displayName = [NSString stringWithFormat:@"%@",dic[@"displayName"]];
+
     friend.canCollectLaterTime = [dic[@"canCollectLaterTime"] longLongValue];
     friend.canCollectEnergy = [dic[@"canCollectEnergy"] boolValue];
     friend.canHelpCollect = [dic[@"canHelpCollect"] boolValue];

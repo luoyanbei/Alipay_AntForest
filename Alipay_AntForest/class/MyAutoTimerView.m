@@ -47,7 +47,6 @@
             [btn setBackgroundColor:[UIColor redColor]];
             btn.frame = CGRectMake(0, 0, btnWidth, btnHeight);
             //[btn addTarget:self action:@selector(minuteBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-            
             _minuteBtn = btn;
 
             [self addSubview:_minuteBtn];
@@ -79,7 +78,7 @@
     NSLog(@"do--startBtnClick");
     self.status = !self.status;
     
-    [btn setTitle:self.status?@"取消":@"定时" forState:UIControlStateNormal];
+    [btn setTitle:self.status?@"取消":@"定时收取" forState:UIControlStateNormal];
     
     if(self.status)
     {
@@ -96,7 +95,6 @@
             
             //[[NSRunLoop currentRunLoop] addTimer:self.myTimer forMode:NSRunLoopCommonModes];
         }
-        
         
     }
     else

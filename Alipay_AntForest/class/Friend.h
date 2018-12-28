@@ -10,7 +10,7 @@
 @interface Friend : NSObject
 
 @property(nonatomic,copy)NSString* userId;
-
+@property(nonatomic,copy)NSString* displayName;
 @property(nonatomic,assign)long long canCollectLaterTime;
 
 @property(nonatomic,assign)BOOL canCollectEnergy;

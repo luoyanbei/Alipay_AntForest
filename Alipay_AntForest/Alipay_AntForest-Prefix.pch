@@ -12,5 +12,7 @@
 
 #define NSLog(FORMAT, ...) NSLog(@"🆘支付宝🆘：[%d]： %@\n", __LINE__,[NSString stringWithFormat:FORMAT, ##__VA_ARGS__]);
 
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
 #endif

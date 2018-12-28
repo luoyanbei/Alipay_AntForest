@@ -43,6 +43,13 @@ static bool saveWaterFriendListToFile(NSString *userid)
     
 }
 
+static bool clearWaterFriendList()
+{
+    BOOL res = [@[] writeToFile:WaterFriendListPath atomically:NO];
+    return res;
+}
+
+
 
 static NSString * handleCurrentFriendUserIdWithStr(NSString * str)
 {
