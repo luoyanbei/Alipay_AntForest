@@ -98,7 +98,7 @@ bubbles : [
 ## 多谢支持 ^_^
 <div align=center><img width="240" height="200" src="./images/zhifubao@2x.png"/><t/><img width="240" height="200" src="./images/wechatpay@2x.png"/></div>
 
-## 关注公众号
+## 关注公众号：逆向APP
 <div align=center><img width="258" height="258" src="./images/qrcode_gongzhonghao.jpg"/>
 
 
